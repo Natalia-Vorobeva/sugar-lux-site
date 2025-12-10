@@ -876,13 +876,13 @@ function App() {
 											<div className="w-16 h-16 rounded-full overflow-hidden border-4 border-white shadow-lg relative">
 												<img
 													src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=761&q=80"
-													alt="Анна, мастер шугаринга"
+													alt="Ирина, мастер шугаринга"
 													className="w-full h-full object-cover"
 												/>
 												<div className="absolute -inset-1 border-2 border-pink-300 rounded-full animate-ping opacity-20"></div>
 											</div>
 											<div className="ml-4">
-												<h3 className="text-xl font-bold text-gray-900 font-serif">Анна Смирнова</h3>
+												<h3 className="text-xl font-bold text-gray-900 font-serif">Ирина Сорокина</h3>
 												<p className="text-gray-600 text-sm">Мастер-эксперт шугаринга</p>
 												<div className="flex items-center mt-1">
 													{[...Array(5)].map((_, i) => (
@@ -988,7 +988,7 @@ function App() {
 						<div className="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12">
 							<h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 font-serif">Обо мне</h2>
 							<p className="text-gray-700 mb-6 text-lg leading-relaxed">
-								Меня зовут Анна, и я профессиональный мастер шугаринга с более чем 10-летним опытом.
+								Меня зовут Ирина, и я профессиональный мастер шугаринга с более чем 10-летним опытом.
 								Начала свой путь в индустрии красоты в 2012 году и с тех пор помогла тысячам клиентов
 								обрести идеально гладкую кожу без раздражений.
 							</p>

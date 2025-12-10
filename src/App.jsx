@@ -31,261 +31,25 @@ import {
 	Clock4,
 	Gem,
 } from 'lucide-react';
+import Header from './Header'
 
-const NewYearBanner = () => {
-	const [isVisible, setIsVisible] = useState(true);
-	const [daysLeft, setDaysLeft] = useState(0);
+const scrollToSection = (e, sectionId) => {
+	e.preventDefault();
+	const element = document.getElementById(sectionId);
+	if (element) {
+		const headerOffset = 80;
+		const elementPosition = element.getBoundingClientRect().top;
+		const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-	useEffect(() => {
-		// Рассчитываем количество дней до Нового года
-		const now = new Date();
-		const newYear = new Date(now.getFullYear() + 1, 0, 1);
-		const diff = Math.ceil((newYear.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
-		setDaysLeft(diff);
-
-		// Автоматически скрыть баннер после Нового года
-		if (now.getMonth() === 0 && now.getDate() < 10) {
-			setIsVisible(false);
-		}
-	}, []);
-
-	if (!isVisible) return null;
-
-	// Правильное склонение для дней
-	const getDaysText = (days) => {
-		if (days % 10 === 1 && days % 100 !== 11) return 'день';
-		if (days % 10 >= 2 && days % 10 <= 4 && (days % 100 < 10 || days % 100 >= 20)) return 'дня';
-		return 'дней';
-	};
-
-	return (
-		<div className="relative overflow-hidden bg-gradient-to-r from-emerald-900 via-red-900 to-emerald-900 my-6 md:my-8 rounded-xl md:rounded-2xl shadow-2xl border border-amber-200/20">
-			{/* Фоновые узоры */}
-			<div className="absolute inset-0 opacity-10">
-				<div className="absolute top-4 left-4 w-8 h-8 border-2 border-amber-300 rounded-full"></div>
-				<div className="absolute bottom-4 right-4 w-12 h-12 border-2 border-amber-300 rounded-full"></div>
-				<div className="absolute top-1/2 left-1/4 w-6 h-6 border border-amber-300 rotate-45"></div>
-				<div className="absolute bottom-1/3 right-1/4 w-4 h-4 border border-amber-300 rotate-45"></div>
-			</div>
-
-			{/* Блестящие частицы */}
-			<div className="absolute top-3 left-1/4 animate-pulse">
-				<div className="w-2 h-2 bg-amber-300 rounded-full"></div>
-			</div>
-			<div className="absolute bottom-3 right-1/3 animate-pulse delay-1000">
-				<div className="w-1.5 h-1.5 bg-white rounded-full"></div>
-			</div>
-
-			<div className="container mx-auto px-4 py-4 md:py-5 relative z-10">
-				<div className="flex flex-col md:flex-row items-center justify-between gap-4">
-					<div className="md:w-3/4">
-						<div className="flex items-center mb-2">
-							<div className="w-8 h-8 bg-gradient-to-r from-amber-400 to-yellow-300 rounded-full flex items-center justify-center mr-3 shadow-lg">
-								<svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-										d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"
-									/>
-								</svg>
-							</div>
-							<div className="flex-1">
-								<span className="text-xs font-semibold text-amber-300 uppercase tracking-wider inline-flex items-center">
-									<span className="mr-2">✦</span>Новогоднее предложение<span className="ml-2">✦</span>
-								</span>
-								<h2 className="text-lg md:text-xl font-bold text-white font-serif leading-tight mt-1">
-									Годовой абонемент со скидкой 25%
-								</h2>
-							</div>
-						</div>
-
-						<div className="flex flex-wrap items-center gap-3 md:gap-4">
-							<div className="flex items-center bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg">
-								<div className="flex items-center mr-2">
-									<span className="text-lg font-bold text-amber-300">18 000₽</span>
-									<span className="mx-2 text-white/60">/</span>
-									<span className="text-sm text-white/80">год</span>
-								</div>
-								<div className="h-4 w-px bg-white/30 mx-2"></div>
-								<div className="text-sm text-white/90">
-									<span className="line-through text-white/60">24 000₽</span>
-									<span className="ml-2 text-emerald-300 font-semibold">-25%</span>
-								</div>
-							</div>
-
-							<div className="hidden md:flex items-center bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg">
-								<svg className="w-4 h-4 text-amber-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-										d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-									/>
-								</svg>
-								<span className="text-sm text-white/90">Приоритетная запись</span>
-							</div>
-
-							<div className="flex items-center bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg">
-								<svg className="w-4 h-4 text-emerald-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-										d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-									/>
-								</svg>
-								<span className="text-sm text-white/90">Экономия 6 000₽</span>
-							</div>
-
-							<div className="flex items-center bg-red-900/60 border border-red-700/50 px-3 py-1.5 rounded-lg">
-								<svg className="w-4 h-4 text-red-300 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-										d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-									/>
-								</svg>
-								<span className="text-sm text-white font-medium">
-									{daysLeft} {getDaysText(daysLeft)}
-								</span>
-							</div>
-						</div>
-					</div>
-
-					<div className="md:w-1/4">
-						<a
-							href="#contact"
-							className="group relative bg-gradient-to-r from-amber-500 to-yellow-400 text-gray-900 px-5 py-3 rounded-xl font-semibold hover:shadow-2xl hover:shadow-amber-500/40 hover:scale-105 transition-all duration-300 flex items-center justify-center shadow-lg shadow-amber-500/20"
-						>
-							<div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-amber-400 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-							<div className="relative z-10 flex items-center">
-								<svg className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-										d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"
-									/>
-								</svg>
-								<span className="font-bold">Забронировать</span>
-							</div>
-						</a>
-
-						<p className="text-xs text-white/60 text-center mt-2 hidden md:block">
-							12 процедур на 12 месяцев
-						</p>
-					</div>
-				</div>
-
-				<button
-					onClick={() => setIsVisible(false)}
-					className="absolute top-2 right-2 text-white/60 hover:text-white transition-colors w-6 h-6 flex items-center justify-center"
-					aria-label="Закрыть баннер"
-				>
-					<svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-						<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-					</svg>
-				</button>
-			</div>
-		</div>
-	);
+		window.scrollTo({
+			top: offsetPosition,
+			behavior: 'smooth'
+		});
+	}
 }
-const NewYearBanner2 = () => {
-	const [isVisible, setIsVisible] = useState(true);
-	const [daysLeft, setDaysLeft] = useState(0);
 
-	useEffect(() => {
-		const now = new Date();
-		const newYear = new Date(now.getFullYear() + 1, 0, 1);
-		const diff = Math.ceil((newYear.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
-		setDaysLeft(diff);
+import { NewYearBanner, NewYearBanner1, NewYearBanner2, NewYearBanner3, NewYearBanner4 } from './Bunners';
 
-		if (now.getMonth() === 0 && now.getDate() < 10) {
-			setIsVisible(false);
-		}
-	}, []);
-
-	const getDaysText = (days) => {
-		if (days % 10 === 1 && days % 100 !== 11) return 'день';
-		if (days % 10 >= 2 && days % 10 <= 4 && (days % 100 < 10 || days % 100 >= 20)) return 'дня';
-		return 'дней';
-	};
-
-	if (!isVisible) return null;
-
-	return (
-		<div className="relative my-4 md:my-6 overflow-hidden">
-			<div className="relative bg-gradient-to-r from-red-800 via-red-900 to-emerald-900 rounded-xl md:rounded-2xl p-1 shadow-2xl">
-				<div className="relative bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 rounded-xl md:rounded-2xl overflow-hidden">
-					{/* Декоративные линии */}
-					<div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-400 to-transparent"></div>
-					<div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-emerald-400 to-transparent"></div>
-
-					<div className="p-4 md:p-5">
-						<div className="flex flex-col md:flex-row items-center justify-between gap-4">
-							<div className="flex-1">
-								<div className="flex items-center mb-2">
-									<div className="mr-3">
-										<div className="w-8 h-8 bg-gradient-to-r from-red-600 to-amber-500 rounded-lg flex items-center justify-center shadow-lg">
-											<svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-												<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-													d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
-												/>
-											</svg>
-										</div>
-									</div>
-									<div>
-										<div className="flex items-center">
-											<span className="text-xs font-semibold text-amber-400 uppercase tracking-wide">
-												Новогодняя акция
-											</span>
-											<div className="ml-3 px-2 py-0.5 bg-red-700/50 rounded-full">
-												<span className="text-xs font-bold text-white">-25%</span>
-											</div>
-										</div>
-										<h3 className="text-base font-bold text-white font-serif mt-1">
-											Годовой абонемент: 12 процедур за 18 000₽
-										</h3>
-									</div>
-								</div>
-
-								<div className="flex flex-wrap items-center gap-3">
-									<div className="flex items-center text-sm">
-										<span className="text-white/70">Экономия:</span>
-										<span className="ml-2 font-bold text-emerald-300">6 000₽</span>
-									</div>
-									<div className="hidden md:block w-px h-4 bg-white/20"></div>
-									<div className="hidden md:flex items-center text-sm">
-										<svg className="w-3 h-3 text-amber-400 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-											<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-										</svg>
-										<span className="text-white/70">до 31 декабря</span>
-									</div>
-								</div>
-							</div>
-
-							<div className="flex items-center gap-4">
-								<div className="text-center">
-									<div className="text-2xl font-bold text-white font-mono">{daysLeft}</div>
-									<div className="text-xs text-white/60 uppercase tracking-wider">{getDaysText(daysLeft)}</div>
-								</div>
-
-								<div className="h-8 w-px bg-white/20 hidden md:block"></div>
-
-								<a
-									href="#contact"
-									className="group bg-gradient-to-r from-amber-600 to-yellow-500 text-white px-4 py-2.5 rounded-lg font-semibold hover:shadow-xl hover:shadow-amber-500/30 hover:scale-105 transition-all duration-300 flex items-center"
-								>
-									<span>Забронировать</span>
-									<svg className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-										<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-									</svg>
-								</a>
-							</div>
-						</div>
-					</div>
-
-					<button
-						onClick={() => setIsVisible(false)}
-						className="absolute top-3 right-3 text-white/50 hover:text-white transition-colors"
-						aria-label="Закрыть баннер"
-					>
-						<svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-						</svg>
-					</button>
-				</div>
-			</div>
-		</div>
-	);
-}
 
 const YearSubscriptionOffer = () => {
 	const [selectedOption, setSelectedOption] = useState('standard');
@@ -598,7 +362,7 @@ const YearSubscriptionOffer = () => {
 									</td>
 								</tr>
 								<tr>
-									<td className="py-4 font-medium">Итоговая экономика</td>
+									<td className="py-4 font-medium">Итоговая экономия</td>
 									<td className="text-center py-4">
 										<div className="text-gray-500">0₽</div>
 									</td>
@@ -616,13 +380,14 @@ const YearSubscriptionOffer = () => {
 					</div>
 				</div>
 
-				<div className="mt-12 text-center">
+				<div className="text-center mt-12">
 					<p className="text-gray-600 mb-6 max-w-2xl mx-auto">
 						Более 85% моих постоянных клиентов выбирают годовой абонемент —
 						это выгодно, удобно и гарантирует регулярный профессиональный уход.
 					</p>
 					<a
 						href="#contact"
+						onClick={(e) => scrollToSection(e, 'contact')}
 						className="inline-flex items-center bg-gradient-to-r from-pink-500 to-rose-500 text-white px-8 py-4 rounded-xl font-medium hover:shadow-2xl hover:scale-105 transition-all duration-300 text-lg shadow-xl"
 					>
 						<Calendar className="mr-3" />
@@ -666,19 +431,7 @@ const FacebookIcon = () => (
 );
 
 // Анимированный логотип для header
-const HeaderLogo = ({ size = 40 }) => {
-	return (
-		<div className="relative" style={{ width: size, height: size }}>
-			<div className="absolute inset-0 bg-gradient-to-r from-pink-500 via-rose-500 to-fuchsia-500 rounded-full animate-pulse-slow opacity-80 blur-sm"></div>
-			<div className="relative w-full h-full bg-white/95 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg shadow-pink-200/50 border border-pink-100">
-				<div className="w-7 h-7 bg-gradient-to-br from-pink-500 to-rose-500 rounded-full flex items-center justify-center animate-gradient-x shadow-inner">
-					<span className="text-white font-bold text-xs font-serif">S</span>
-				</div>
-				<div className="absolute -inset-1.5 border border-pink-300/30 rounded-full animate-ping opacity-20"></div>
-			</div>
-		</div>
-	);
-};
+
 
 // Простой компонент для анимаций
 const FadeIn = ({ children, delay = 0 }) => {
@@ -756,186 +509,186 @@ const advantages = [
 ];
 
 // Адаптивный Header
-const Header = () => {
-	const [isMenuOpen, setIsMenuOpen] = useState(false);
-	const [scrolled, setScrolled] = useState(false);
+// const Header = () => {
+// 	const [isMenuOpen, setIsMenuOpen] = useState(false);
+// 	const [scrolled, setScrolled] = useState(false);
 
-	useEffect(() => {
-		const handleScroll = () => {
-			setScrolled(window.scrollY > 20);
-		};
+// 	useEffect(() => {
+// 		const handleScroll = () => {
+// 			setScrolled(window.scrollY > 20);
+// 		};
 
-		window.addEventListener('scroll', handleScroll);
+// 		window.addEventListener('scroll', handleScroll);
 
-		return () => {
-			window.removeEventListener('scroll', handleScroll);
-		};
-	}, []);
+// 		return () => {
+// 			window.removeEventListener('scroll', handleScroll);
+// 		};
+// 	}, []);
 
-	return (
-		<header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled
-			? 'bg-white/98 backdrop-blur-xl shadow-2xl py-3'
-			: 'bg-white/95 backdrop-blur-lg shadow-xl py-4'
-			}`}>
-			<div className="container mx-auto px-4 sm:px-6">
-				<div className="flex justify-between items-center">
-					{/* Логотип и название */}
-					<div className="flex items-center space-x-3 min-w-0 flex-1">
-						<HeaderLogo size={44} />
-						<div className="min-w-0">
-							<h1 className="text-lg sm:text-xl font-bold text-gray-900 font-serif tracking-tight truncate">
-								SugarLux
-							</h1>
-							<p className="text-xs text-gray-500 font-sans hidden sm:block">
-								профессиональный шугаринг
-							</p>
-							<p className="text-xs text-gray-500 font-sans sm:hidden">
-								шугаринг
-							</p>
-						</div>
-					</div>
+// 	return (
+// 		<header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled
+// 			? 'bg-white/98 backdrop-blur-xl shadow-2xl py-3'
+// 			: 'bg-white/95 backdrop-blur-lg shadow-xl py-4'
+// 			}`}>
+// 			<div className="container mx-auto px-4 sm:px-6">
+// 				<div className="flex justify-between items-center">
+// 					{/* Логотип и название */}
+// 					<div className="flex items-center space-x-3 min-w-0 flex-1">
+// 						<HeaderLogo size={44} />
+// 						<div className="min-w-0">
+// 							<h1 className="text-lg sm:text-xl font-bold text-gray-900 font-serif tracking-tight truncate">
+// 								SugarLux
+// 							</h1>
+// 							<p className="text-xs text-gray-500 font-sans hidden sm:block">
+// 								профессиональный шугаринг
+// 							</p>
+// 							<p className="text-xs text-gray-500 font-sans sm:hidden">
+// 								шугаринг
+// 							</p>
+// 						</div>
+// 					</div>
 
-					{/* Навигация для десктопа */}
-					<nav className="hidden md:flex items-center space-x-1 bg-white/80 rounded-full px-2 py-1.5 shadow-inner border border-gray-100">
-						<a
-							href="#services"
-							className="px-4 py-2 rounded-full text-sm font-medium text-gray-700 hover:text-pink-600 hover:bg-gradient-to-r hover:from-pink-50 hover:to-rose-50 transition-all duration-200"
-						>
-							Услуги
-						</a>
-						<a
-							href="#about"
-							className="px-4 py-2 rounded-full text-sm font-medium text-gray-700 hover:text-pink-600 hover:bg-gradient-to-r hover:from-pink-50 hover:to-rose-50 transition-all duration-200"
-						>
-							Обо мне
-						</a>
-						<a
-							href="#contact"
-							className="px-4 py-2 rounded-full text-sm font-medium text-gray-700 hover:text-pink-600 hover:bg-gradient-to-r hover:from-pink-50 hover:to-rose-50 transition-all duration-200"
-						>
-							Запись
-						</a>
-					</nav>
+// 					{/* Навигация для десктопа */}
+// 					<nav className="hidden md:flex items-center space-x-1 bg-white/80 rounded-full px-2 py-1.5 shadow-inner border border-gray-100">
+// 						<a
+// 							href="#services"
+// 							className="px-4 py-2 rounded-full text-sm font-medium text-gray-700 hover:text-pink-600 hover:bg-gradient-to-r hover:from-pink-50 hover:to-rose-50 transition-all duration-200"
+// 						>
+// 							Услуги
+// 						</a>
+// 						<a
+// 							href="#about"
+// 							className="px-4 py-2 rounded-full text-sm font-medium text-gray-700 hover:text-pink-600 hover:bg-gradient-to-r hover:from-pink-50 hover:to-rose-50 transition-all duration-200"
+// 						>
+// 							Обо мне
+// 						</a>
+// 						<a
+// 							href="#contact"
+// 							className="px-4 py-2 rounded-full text-sm font-medium text-gray-700 hover:text-pink-600 hover:bg-gradient-to-r hover:from-pink-50 hover:to-rose-50 transition-all duration-200"
+// 						>
+// 							Запись
+// 						</a>
+// 					</nav>
 
-					{/* Правая часть */}
-					<div className="flex items-center space-x-2 sm:space-x-3 ml-3">
-						{/* Кнопка записи на десктопе */}
-						<a
-							href="#contact"
-							className="hidden md:flex items-center bg-gradient-to-r from-pink-500 to-rose-500 text-white px-4 sm:px-5 py-2.5 rounded-full font-medium hover:shadow-2xl hover:scale-105 transition-all duration-300 shadow-lg shadow-pink-500/30 hover:shadow-pink-500/50 group"
-						>
-							<Calendar size={18} className="mr-2 group-hover:scale-110 transition-transform" />
-							<span>Записаться</span>
-						</a>
+// 					{/* Правая часть */}
+// 					<div className="flex items-center space-x-2 sm:space-x-3 ml-3">
+// 						{/* Кнопка записи на десктопе */}
+// 						<a
+// 							href="#contact"
+// 							className="hidden md:flex items-center bg-gradient-to-r from-pink-500 to-rose-500 text-white px-4 sm:px-5 py-2.5 rounded-full font-medium hover:shadow-2xl hover:scale-105 transition-all duration-300 shadow-lg shadow-pink-500/30 hover:shadow-pink-500/50 group"
+// 						>
+// 							<Calendar size={18} className="mr-2 group-hover:scale-110 transition-transform" />
+// 							<span>Записаться</span>
+// 						</a>
 
-						{/* Телефон на мобильных */}
-						<a
-							href="tel:+79161234567"
-							className="md:hidden flex items-center justify-center bg-gradient-to-r from-pink-500 to-rose-500 text-white w-10 h-10 rounded-full shadow-lg shadow-pink-500/30 hover:shadow-2xl hover:shadow-pink-500/50 transition-all"
-							aria-label="Позвонить"
-						>
-							<Phone size={20} />
-						</a>
+// 						{/* Телефон на мобильных */}
+// 						<a
+// 							href="tel:+79161234567"
+// 							className="md:hidden flex items-center justify-center bg-gradient-to-r from-pink-500 to-rose-500 text-white w-10 h-10 rounded-full shadow-lg shadow-pink-500/30 hover:shadow-2xl hover:shadow-pink-500/50 transition-all"
+// 							aria-label="Позвонить"
+// 						>
+// 							<Phone size={20} />
+// 						</a>
 
-						{/* Анимированный бургер-меню */}
-						<button
-							onClick={() => setIsMenuOpen(!isMenuOpen)}
-							className="md:hidden w-10 h-10 flex items-center justify-center rounded-lg hover:bg-pink-50 transition-colors relative"
-							aria-label="Меню"
-						>
-							<div className="relative w-6 h-5">
-								<span className={`absolute top-0 left-0 w-full h-0.5 bg-gray-700 transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
-								<span className={`absolute top-2 left-0 w-full h-0.5 bg-gray-700 transition-all duration-300 ${isMenuOpen ? 'opacity-0' : ''}`}></span>
-								<span className={`absolute bottom-0 left-0 w-full h-0.5 bg-gray-700 transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
-							</div>
-						</button>
-					</div>
-				</div>
+// 						{/* Анимированный бургер-меню */}
+// 						<button
+// 							onClick={() => setIsMenuOpen(!isMenuOpen)}
+// 							className="md:hidden w-10 h-10 flex items-center justify-center rounded-lg hover:bg-pink-50 transition-colors relative"
+// 							aria-label="Меню"
+// 						>
+// 							<div className="relative w-6 h-5">
+// 								<span className={`absolute top-0 left-0 w-full h-0.5 bg-gray-700 transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+// 								<span className={`absolute top-2 left-0 w-full h-0.5 bg-gray-700 transition-all duration-300 ${isMenuOpen ? 'opacity-0' : ''}`}></span>
+// 								<span className={`absolute bottom-0 left-0 w-full h-0.5 bg-gray-700 transition-all duration-300 ${isMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+// 							</div>
+// 						</button>
+// 					</div>
+// 				</div>
 
-				{/* Мобильное меню */}
-				<div className={`md:hidden overflow-hidden transition-all duration-300 ${isMenuOpen ? 'max-h-96 opacity-100 mt-4' : 'max-h-0 opacity-0'
-					}`}>
-					<div className="bg-white/95 backdrop-blur-lg rounded-2xl shadow-2xl p-4 border border-pink-100">
-						<div className="space-y-2">
-							<a
-								href="#services"
-								onClick={() => setIsMenuOpen(false)}
-								className="flex items-center justify-between p-3 rounded-xl hover:bg-gradient-to-r hover:from-pink-50 hover:to-rose-50 transition-all duration-200 group"
-							>
-								<div className="flex items-center">
-									<div className="w-10 h-10 bg-gradient-to-r from-pink-100 to-rose-100 rounded-xl flex items-center justify-center mr-3 group-hover:scale-110 transition-transform shadow-sm">
-										<Package size={20} className="text-pink-600" />
-									</div>
-									<div>
-										<div className="font-medium text-gray-900 font-serif">Услуги</div>
-										<div className="text-xs text-gray-500 font-sans">Процедуры и цены</div>
-									</div>
-								</div>
-								<ChevronRight size={18} className="text-gray-400 group-hover:text-pink-500 group-hover:translate-x-1 transition-all" />
-							</a>
+// 				{/* Мобильное меню */}
+// 				<div className={`md:hidden overflow-hidden transition-all duration-300 ${isMenuOpen ? 'max-h-96 opacity-100 mt-4' : 'max-h-0 opacity-0'
+// 					}`}>
+// 					<div className="bg-white/95 backdrop-blur-lg rounded-2xl shadow-2xl p-4 border border-pink-100">
+// 						<div className="space-y-2">
+// 							<a
+// 								href="#services"
+// 								onClick={() => setIsMenuOpen(false)}
+// 								className="flex items-center justify-between p-3 rounded-xl hover:bg-gradient-to-r hover:from-pink-50 hover:to-rose-50 transition-all duration-200 group"
+// 							>
+// 								<div className="flex items-center">
+// 									<div className="w-10 h-10 bg-gradient-to-r from-pink-100 to-rose-100 rounded-xl flex items-center justify-center mr-3 group-hover:scale-110 transition-transform shadow-sm">
+// 										<Package size={20} className="text-pink-600" />
+// 									</div>
+// 									<div>
+// 										<div className="font-medium text-gray-900 font-serif">Услуги</div>
+// 										<div className="text-xs text-gray-500 font-sans">Процедуры и цены</div>
+// 									</div>
+// 								</div>
+// 								<ChevronRight size={18} className="text-gray-400 group-hover:text-pink-500 group-hover:translate-x-1 transition-all" />
+// 							</a>
 
-							<a
-								href="#about"
-								onClick={() => setIsMenuOpen(false)}
-								className="flex items-center justify-between p-3 rounded-xl hover:bg-gradient-to-r hover:from-pink-50 hover:to-rose-50 transition-all duration-200 group"
-							>
-								<div className="flex items-center">
-									<div className="w-10 h-10 bg-gradient-to-r from-pink-100 to-rose-100 rounded-xl flex items-center justify-center mr-3 group-hover:scale-110 transition-transform shadow-sm">
-										<UserCheck size={20} className="text-pink-600" />
-									</div>
-									<div>
-										<div className="font-medium text-gray-900 font-serif">Обо мне</div>
-										<div className="text-xs text-gray-500 font-sans">10+ лет опыта</div>
-									</div>
-								</div>
-								<ChevronRight size={18} className="text-gray-400 group-hover:text-pink-500 group-hover:translate-x-1 transition-all" />
-							</a>
+// 							<a
+// 								href="#about"
+// 								onClick={() => setIsMenuOpen(false)}
+// 								className="flex items-center justify-between p-3 rounded-xl hover:bg-gradient-to-r hover:from-pink-50 hover:to-rose-50 transition-all duration-200 group"
+// 							>
+// 								<div className="flex items-center">
+// 									<div className="w-10 h-10 bg-gradient-to-r from-pink-100 to-rose-100 rounded-xl flex items-center justify-center mr-3 group-hover:scale-110 transition-transform shadow-sm">
+// 										<UserCheck size={20} className="text-pink-600" />
+// 									</div>
+// 									<div>
+// 										<div className="font-medium text-gray-900 font-serif">Обо мне</div>
+// 										<div className="text-xs text-gray-500 font-sans">10+ лет опыта</div>
+// 									</div>
+// 								</div>
+// 								<ChevronRight size={18} className="text-gray-400 group-hover:text-pink-500 group-hover:translate-x-1 transition-all" />
+// 							</a>
 
-							<a
-								href="#contact"
-								onClick={() => setIsMenuOpen(false)}
-								className="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-pink-50 to-rose-50 hover:from-pink-100 hover:to-rose-100 transition-all duration-200 group border border-pink-100"
-							>
-								<div className="flex items-center">
-									<div className="w-10 h-10 bg-gradient-to-r from-pink-500 to-rose-500 rounded-xl flex items-center justify-center mr-3 group-hover:scale-110 transition-transform shadow-lg">
-										<Calendar size={20} className="text-white" />
-									</div>
-									<div>
-										<div className="font-medium text-gray-900 font-serif">Онлайн-запись</div>
-										<div className="text-xs text-gray-500 font-sans">Быстро и удобно</div>
-									</div>
-								</div>
-								<div className="bg-gradient-to-r from-pink-500 to-rose-500 text-white px-3 py-1 rounded-full text-xs font-medium shadow-sm">
-									-15%
-								</div>
-							</a>
-						</div>
+// 							<a
+// 								href="#contact"
+// 								onClick={() => setIsMenuOpen(false)}
+// 								className="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-pink-50 to-rose-50 hover:from-pink-100 hover:to-rose-100 transition-all duration-200 group border border-pink-100"
+// 							>
+// 								<div className="flex items-center">
+// 									<div className="w-10 h-10 bg-gradient-to-r from-pink-500 to-rose-500 rounded-xl flex items-center justify-center mr-3 group-hover:scale-110 transition-transform shadow-lg">
+// 										<Calendar size={20} className="text-white" />
+// 									</div>
+// 									<div>
+// 										<div className="font-medium text-gray-900 font-serif">Онлайн-запись</div>
+// 										<div className="text-xs text-gray-500 font-sans">Быстро и удобно</div>
+// 									</div>
+// 								</div>
+// 								<div className="bg-gradient-to-r from-pink-500 to-rose-500 text-white px-3 py-1 rounded-full text-xs font-medium shadow-sm">
+// 									-15%
+// 								</div>
+// 							</a>
+// 						</div>
 
-						{/* Контакты в мобильном меню */}
-						<div className="mt-4 pt-4 border-t border-pink-100">
-							<div className="grid grid-cols-2 gap-2">
-								<a
-									href="tel:+79161234567"
-									className="flex items-center justify-center p-2.5 rounded-lg hover:bg-gradient-to-r hover:from-pink-50 hover:to-rose-50 transition-colors text-sm"
-								>
-									<Phone size={16} className="text-pink-600 mr-2" />
-									<span className="font-medium">Позвонить</span>
-								</a>
-								<a
-									href="https://wa.me/79161234567"
-									className="flex items-center justify-center p-2.5 rounded-lg hover:bg-gradient-to-r hover:from-emerald-50 hover:to-green-50 transition-colors text-sm"
-								>
-									<span className="text-green-600 mr-2">💬</span>
-									<span className="font-medium">WhatsApp</span>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</header>
-	);
-};
+// 						{/* Контакты в мобильном меню */}
+// 						<div className="mt-4 pt-4 border-t border-pink-100">
+// 							<div className="grid grid-cols-2 gap-2">
+// 								<a
+// 									href="tel:+79161234567"
+// 									className="flex items-center justify-center p-2.5 rounded-lg hover:bg-gradient-to-r hover:from-pink-50 hover:to-rose-50 transition-colors text-sm"
+// 								>
+// 									<Phone size={16} className="text-pink-600 mr-2" />
+// 									<span className="font-medium">Позвонить</span>
+// 								</a>
+// 								<a
+// 									href="https://wa.me/79161234567"
+// 									className="flex items-center justify-center p-2.5 rounded-lg hover:bg-gradient-to-r hover:from-emerald-50 hover:to-green-50 transition-colors text-sm"
+// 								>
+// 									<span className="text-green-600 mr-2">💬</span>
+// 									<span className="font-medium">WhatsApp</span>
+// 								</a>
+// 							</div>
+// 						</div>
+// 					</div>
+// 				</div>
+// 			</div>
+// 		</header>
+// 	);
+// };
 
 function App() {
 	const [isSubmitting, setIsSubmitting] = useState(false);
@@ -972,45 +725,86 @@ function App() {
 	};
 
 	// Компонент для стильных кнопок
-	const PrimaryButton = ({ children, href, icon, ...props }) => (
-		<a
-			href={href}
-			className="group relative bg-gradient-to-r from-pink-500 via-rose-500 to-fuchsia-500 text-white px-8 py-4 rounded-xl font-medium hover:shadow-2xl hover:shadow-pink-500/40 hover:scale-105 transition-all duration-300 text-lg shadow-xl shadow-pink-500/30 inline-flex items-center justify-center overflow-hidden"
-			{...props}
-		>
-			{/* Эффект свечения */}
-			<div className="absolute inset-0 bg-gradient-to-r from-pink-400 via-rose-400 to-fuchsia-400 animate-gradient-x opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-			{/* Основной контент */}
-			<div className="relative z-10 flex items-center">
-				{icon === 'sparkles' && <Sparkles className="mr-3 group-hover:rotate-12 transition-transform" />}
-				{icon === 'crystal' && <CrystalIcon />}
-				{icon === 'premium' && <PremiumIcon />}
-				{icon === 'arrow' && <ArrowRight className="ml-3 group-hover:translate-x-2 transition-transform" />}
-				{children}
-			</div>
-			{/* Эффект объема */}
-			<div className="absolute inset-0 border-2 border-white/20 rounded-xl translate-y-1 -z-10 opacity-50 group-hover:translate-y-0.5 transition-transform"></div>
-		</a>
-	);
+	// const PrimaryButton = ({ children, href, icon, ...props }) => (
+	// 	<a
+	// 		href={href}
+	// 		className="group relative bg-gradient-to-r from-pink-500 via-rose-500 to-fuchsia-500 text-white px-8 py-4 rounded-xl font-medium hover:shadow-2xl hover:shadow-pink-500/40 hover:scale-105 transition-all duration-300 text-lg shadow-xl shadow-pink-500/30 inline-flex items-center justify-center overflow-hidden"
+	// 		{...props}
+	// 	>
+	// 		{/* Эффект свечения */}
+	// 		<div className="absolute inset-0 bg-gradient-to-r from-pink-400 via-rose-400 to-fuchsia-400 animate-gradient-x opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+	// 		{/* Основной контент */}
+	// 		<div className="relative z-10 flex items-center">
+	// 			{icon === 'sparkles' && <Sparkles className="mr-3 group-hover:rotate-12 transition-transform" />}
+	// 			{icon === 'crystal' && <CrystalIcon />}
+	// 			{icon === 'premium' && <PremiumIcon />}
+	// 			{icon === 'arrow' && <ArrowRight className="ml-3 group-hover:translate-x-2 transition-transform" />}
+	// 			{children}
+	// 		</div>
+	// 		{/* Эффект объема */}
+	// 		<div className="absolute inset-0 border-2 border-white/20 rounded-xl translate-y-1 -z-10 opacity-50 group-hover:translate-y-0.5 transition-transform"></div>
+	// 	</a>
+	// );
 
-	const SecondaryButton = ({ children, href, ...props }) => (
-		<a
-			href={href}
-			className="group relative bg-white text-pink-600 px-8 py-4 rounded-xl font-medium hover:shadow-xl hover:scale-105 transition-all duration-300 text-lg shadow-lg border-2 border-pink-200 hover:border-pink-300 inline-flex items-center justify-center overflow-hidden"
-			{...props}
-		>
-			{/* Эффект фона при наведении */}
-			<div className="absolute inset-0 bg-gradient-to-r from-pink-50 to-rose-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-			{/* Основной контент */}
-			<div className="relative z-10 flex items-center">
-				{children}
-				<ChevronRight className="ml-3 group-hover:translate-x-2 transition-transform" />
-			</div>
-			{/* Декоративные элементы */}
-			<div className="absolute top-2 right-2 w-2 h-2 bg-pink-300 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
-			<div className="absolute bottom-2 left-2 w-3 h-3 bg-rose-300 rounded-full opacity-0 group-hover:opacity-100 transition-opacity delay-100"></div>
-		</a>
-	);
+	// const SecondaryButton = ({ children, href, ...props }) => (
+	// 	<a
+	// 		href={href}
+	// 		className="group relative bg-white text-pink-600 px-8 py-4 rounded-xl font-medium hover:shadow-xl hover:scale-105 transition-all duration-300 text-lg shadow-lg border-2 border-pink-200 hover:border-pink-300 inline-flex items-center justify-center overflow-hidden"
+	// 		{...props}
+	// 	>
+	// 		{/* Эффект фона при наведении */}
+	// 		<div className="absolute inset-0 bg-gradient-to-r from-pink-50 to-rose-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+	// 		{/* Основной контент */}
+	// 		<div className="relative z-10 flex items-center">
+	// 			{children}
+	// 			<ChevronRight className="ml-3 group-hover:translate-x-2 transition-transform" />
+	// 		</div>
+	// 		{/* Декоративные элементы */}
+	// 		<div className="absolute top-2 right-2 w-2 h-2 bg-pink-300 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+	// 		<div className="absolute bottom-2 left-2 w-3 h-3 bg-rose-300 rounded-full opacity-0 group-hover:opacity-100 transition-opacity delay-100"></div>
+	// 	</a>
+	// );
+	// const PrimaryButton = ({ children, href, icon, sectionId, ...props }) => (
+	//   <a
+	//     href={href}
+	//     onClick={(e) => sectionId && scrollToSection(e, sectionId)}
+	//     className="group relative bg-gradient-to-r from-pink-500 via-rose-500 to-fuchsia-500 text-white px-8 py-4 rounded-xl font-medium hover:shadow-2xl hover:shadow-pink-500/40 hover:scale-105 transition-all duration-300 text-lg shadow-xl shadow-pink-500/30 inline-flex items-center justify-center overflow-hidden"
+	//     {...props}
+	//   >
+	//     {/* Эффект свечения */}
+	//     <div className="absolute inset-0 bg-gradient-to-r from-pink-400 via-rose-400 to-fuchsia-400 animate-gradient-x opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+	//     {/* Основной контент */}
+	//     <div className="relative z-10 flex items-center">
+	//       {icon === 'sparkles' && <Sparkles className="mr-3 group-hover:rotate-12 transition-transform" />}
+	//       {icon === 'crystal' && <CrystalIcon />}
+	//       {icon === 'premium' && <PremiumIcon />}
+	//       {icon === 'arrow' && <ArrowRight className="ml-3 group-hover:translate-x-2 transition-transform" />}
+	//       {children}
+	//     </div>
+	//     {/* Эффект объема */}
+	//     <div className="absolute inset-0 border-2 border-white/20 rounded-xl translate-y-1 -z-10 opacity-50 group-hover:translate-y-0.5 transition-transform"></div>
+	//   </a>
+	// );
+
+	// const SecondaryButton = ({ children, href, sectionId, ...props }) => (
+	//   <a
+	//     href={href}
+	//     onClick={(e) => sectionId && scrollToSection(e, sectionId)}
+	//     className="group relative bg-white text-pink-600 px-8 py-4 rounded-xl font-medium hover:shadow-xl hover:scale-105 transition-all duration-300 text-lg shadow-lg border-2 border-pink-200 hover:border-pink-300 inline-flex items-center justify-center overflow-hidden"
+	//     {...props}
+	//   >
+	//     {/* Эффект фона при наведении */}
+	//     <div className="absolute inset-0 bg-gradient-to-r from-pink-50 to-rose-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+	//     {/* Основной контент */}
+	//     <div className="relative z-10 flex items-center">
+	//       {children}
+	//       <ChevronRight className="ml-3 group-hover:translate-x-2 transition-transform" />
+	//     </div>
+	//     {/* Декоративные элементы */}
+	//     <div className="absolute top-2 right-2 w-2 h-2 bg-pink-300 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+	//     <div className="absolute bottom-2 left-2 w-3 h-3 bg-rose-300 rounded-full opacity-0 group-hover:opacity-100 transition-opacity delay-100"></div>
+	//   </a>
+	// )
 
 	return (
 		<div className="min-h-screen bg-gradient-to-b from-pink-50/30 via-white to-white font-sans">
@@ -1037,12 +831,12 @@ function App() {
 							авторских безболезненных техник и натуральных составов премиум-класса.
 						</p>
 						<div className="flex flex-col sm:flex-row gap-4 mb-12">
-							<PrimaryButton href="#contact" icon="sparkles">
-								Записаться онлайн
-							</PrimaryButton>
-							<SecondaryButton href="#services">
-								Посмотреть услуги
-							</SecondaryButton>
+							{/* <PrimaryButton href="#contact" icon="sparkles" sectionId="contact">
+                Записаться онлайн
+              </PrimaryButton>
+              <SecondaryButton href="#services" sectionId="services">
+                Посмотреть услуги
+              </SecondaryButton> */}
 						</div>
 
 						{/* Статистика */}
@@ -1056,7 +850,7 @@ function App() {
 								<div className="text-gray-600 text-sm">довольных клиентов</div>
 							</div>
 							<div className="text-center p-4 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm border border-pink-100">
-								<div className="text-2xl sm:text-3xl font-bold text-pink-600 font-serif">4.9/5</div>
+								<div className="text-2xl sm:text-3-xl font-bold text-pink-600 font-serif">4.9/5</div>
 								<div className="text-gray-600 text-sm">рейтинг эксперта</div>
 							</div>
 						</div>
@@ -1119,9 +913,12 @@ function App() {
 					</FadeIn>
 				</div>
 			</section>
-
-			<NewYearBanner />
+			{/* <NewYearBanner />
+			<NewYearBanner1 />
 			<NewYearBanner2 />
+			<NewYearBanner3 /> */}
+			<NewYearBanner4 />
+			{/* <NewYearBanner2 /> */}
 			{/* Коммерческое предложение по абонементу */}
 			<YearSubscriptionOffer />
 
@@ -1264,7 +1061,7 @@ function App() {
 			{/* Контакты и форма */}
 			<section id="contact" className="container mx-auto px-4 sm:px-6 py-16">
 				<div className="text-center mb-12">
-					<h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-serif">Контакты и запись</h2>
+					<h2 className="text-3xl md:text-4xl font-bold text-gray-900 pt-4 mb-4 font-serif">Контакты и запись</h2>
 					<p className="text-gray-600 max-w-2xl mx-auto text-lg">
 						Свяжитесь со мной любым удобным способом или заполните форму для записи на процедуру
 					</p>
@@ -1403,8 +1200,8 @@ function App() {
 												{...register("phone", {
 													required: "Введите ваш телефон",
 													pattern: {
-														value: /^[\+]?[7-8]?[0-9]{10}$/,
-														message: "Введите корректный номер телефона"
+														// value: /^[\+]?[7-8]?[0-9]{10}$/,
+														// message: "Введите корректный номер телефона"
 													}
 												})}
 											/>

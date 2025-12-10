@@ -1091,8 +1091,8 @@ function App() {
 									</div>
 									<div>
 										<div className="text-gray-600 text-sm">Email</div>
-										<a href="mailto:anna@sugarlux.ru" className="text-lg font-medium text-gray-900 hover:text-pink-600 transition-colors font-serif block">
-											anna@sugarlux.ru
+										<a href="mailto:irina@sugarlux.ru" className="text-lg font-medium text-gray-900 hover:text-pink-600 transition-colors font-serif block">
+											irina@sugarlux.ru
 										</a>
 									</div>
 								</div>

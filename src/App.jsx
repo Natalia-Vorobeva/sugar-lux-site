@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useForm } from 'react-hook-form';
 import {
+	Heart, 
 	Phone,
 	Mail,
 	MapPin,
@@ -48,356 +49,356 @@ const scrollToSection = (e, sectionId) => {
 	}
 }
 
-import { NewYearBanner, NewYearBanner1, NewYearBanner2, NewYearBanner3, NewYearBanner4, NewYearBanner5 } from './Bunners';
+import {  NewYearBanner5 } from './Bunners';
 
 
-const YearSubscriptionOffer = () => {
-	const [selectedOption, setSelectedOption] = useState('standard');
+// const YearSubscriptionOffer = () => {
+// 	const [selectedOption, setSelectedOption] = useState('standard');
 
-	const subscriptionOptions = [
-		{
-			id: 'standard',
-			name: 'Стандарт',
-			price: 2000,
-			period: 'месяц',
-			features: ['1 процедура в месяц', 'Запись по стандартному графику', 'Базовый уход после процедуры'],
-			color: 'from-pink-100 to-rose-100',
-			borderColor: 'border-pink-200'
-		},
-		{
-			id: 'premium',
-			name: 'Премиум абонемент',
-			price: 18000,
-			period: 'год',
-			features: [
-				'12 процедур (экономия 6 000₽)',
-				'Приоритетная запись на удобное время',
-				'Бесплатная консультация косметолога',
-				'Подарочный набор premium-ухода',
-				'Замораживание абонемента на 1 месяц'
-			],
-			popular: true,
-			color: 'from-yellow-50 to-orange-50',
-			borderColor: 'border-yellow-300',
-			badge: 'Выгоднее на 25%'
-		},
-		{
-			id: 'installment',
-			name: 'Рассрочка',
-			price: 5000,
-			period: '3 месяца',
-			features: [
-				'12 процедур в рассрочку',
-				'4 платежа по 5 000₽ (итого 20 000₽)',
-				'Экономия 4 000₽',
-				'Все преимущества абонемента',
-				'Без процентов и переплат'
-			],
-			color: 'from-blue-50 to-cyan-50',
-			borderColor: 'border-blue-200'
-		}
-	];
+// 	const subscriptionOptions = [
+// 		{
+// 			id: 'standard',
+// 			name: 'Стандарт',
+// 			price: 2000,
+// 			period: 'месяц',
+// 			features: ['1 процедура в месяц', 'Запись по стандартному графику', 'Базовый уход после процедуры'],
+// 			color: 'from-pink-100 to-rose-100',
+// 			borderColor: 'border-pink-200'
+// 		},
+// 		{
+// 			id: 'premium',
+// 			name: 'Премиум абонемент',
+// 			price: 18000,
+// 			period: 'год',
+// 			features: [
+// 				'12 процедур (экономия 6 000₽)',
+// 				'Приоритетная запись на удобное время',
+// 				'Бесплатная консультация косметолога',
+// 				'Подарочный набор premium-ухода',
+// 				'Замораживание абонемента на 1 месяц'
+// 			],
+// 			popular: true,
+// 			color: 'from-yellow-50 to-orange-50',
+// 			borderColor: 'border-yellow-300',
+// 			badge: 'Выгоднее на 25%'
+// 		},
+// 		{
+// 			id: 'installment',
+// 			name: 'Рассрочка',
+// 			price: 5000,
+// 			period: '3 месяца',
+// 			features: [
+// 				'12 процедур в рассрочку',
+// 				'4 платежа по 5 000₽ (итого 20 000₽)',
+// 				'Экономия 4 000₽',
+// 				'Все преимущества абонемента',
+// 				'Без процентов и переплат'
+// 			],
+// 			color: 'from-blue-50 to-cyan-50',
+// 			borderColor: 'border-blue-200'
+// 		}
+// 	];
 
-	const selected = subscriptionOptions.find(opt => opt.id === selectedOption);
+// 	const selected = subscriptionOptions.find(opt => opt.id === selectedOption);
 
-	return (
-		<section className="py-16 bg-gradient-to-b from-white to-pink-50/30">
-			<div className="container mx-auto px-4">
-				<div className="text-center mb-12">
-					<div className="inline-flex items-center bg-gradient-to-r from-pink-100 to-rose-100 text-pink-700 px-4 py-2 rounded-full text-sm font-medium mb-4 font-sans shadow-sm">
-						<Crown size={16} className="mr-2" />
-						<span>Эксклюзивное предложение</span>
-					</div>
-					<h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-serif">
-						Инвестируйте в свою красоту
-						<span className="block text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-rose-500">
-							Выгоднее на целый год
-						</span>
-					</h2>
-					<p className="text-gray-600 max-w-2xl mx-auto text-lg">
-						Позаботьтесь о своей коже на год вперед и получите максимум преимуществ
-						с годовым абонементом
-					</p>
-				</div>
+// 	return (
+// 		<section className="py-16 bg-gradient-to-b from-white to-pink-50/30">
+// 			<div className="container mx-auto px-4">
+// 				<div className="text-center mb-12">
+// 					<div className="inline-flex items-center bg-gradient-to-r from-pink-100 to-rose-100 text-pink-700 px-4 py-2 rounded-full text-sm font-medium mb-4 font-sans shadow-sm">
+// 						<Crown size={16} className="mr-2" />
+// 						<span>Эксклюзивное предложение</span>
+// 					</div>
+// 					<h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-serif">
+// 						Инвестируйте в свою красоту
+// 						<span className="block text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-rose-500">
+// 							Выгоднее на целый год
+// 						</span>
+// 					</h2>
+// 					<p className="text-gray-600 max-w-2xl mx-auto text-lg">
+// 						Позаботьтесь о своей коже на год вперед и получите максимум преимуществ
+// 						с годовым абонементом
+// 					</p>
+// 				</div>
 
-				<div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-					{subscriptionOptions.map((option) => (
-						<div
-							key={option.id}
-							className={`relative rounded-2xl p-6 border-2 ${option.borderColor} bg-gradient-to-br ${option.color} cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl ${selectedOption === option.id ? 'ring-2 ring-pink-500 shadow-xl' : ''
-								}`}
-							onClick={() => setSelectedOption(option.id)}
-						>
-							{option.popular && (
-								<div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-									<div className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-4 py-1 rounded-full text-sm font-medium shadow-lg">
-										🏆 {option.badge}
-									</div>
-								</div>
-							)}
+// 				<div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+// 					{subscriptionOptions.map((option) => (
+// 						<div
+// 							key={option.id}
+// 							className={`relative rounded-2xl p-6 border-2 ${option.borderColor} bg-gradient-to-br ${option.color} cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl ${selectedOption === option.id ? 'ring-2 ring-pink-500 shadow-xl' : ''
+// 								}`}
+// 							onClick={() => setSelectedOption(option.id)}
+// 						>
+// 							{option.popular && (
+// 								<div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+// 									<div className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-4 py-1 rounded-full text-sm font-medium shadow-lg">
+// 										🏆 {option.badge}
+// 									</div>
+// 								</div>
+// 							)}
 
-							<div className="text-center mb-6">
-								<h3 className="text-xl font-bold text-gray-900 font-serif mb-2">{option.name}</h3>
-								<div className="flex items-center justify-center">
-									<div className="text-3xl font-bold text-gray-900">{option.price.toLocaleString()}₽</div>
-									<div className="text-gray-600 ml-2">/ {option.period}</div>
-								</div>
-							</div>
+// 							<div className="text-center mb-6">
+// 								<h3 className="text-xl font-bold text-gray-900 font-serif mb-2">{option.name}</h3>
+// 								<div className="flex items-center justify-center">
+// 									<div className="text-3xl font-bold text-gray-900">{option.price.toLocaleString()}₽</div>
+// 									<div className="text-gray-600 ml-2">/ {option.period}</div>
+// 								</div>
+// 							</div>
 
-							<div className="space-y-3 mb-6">
-								{option.features.map((feature, idx) => (
-									<div key={idx} className="flex items-start">
-										<CheckCircle size={18} className="text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-										<span className="text-gray-700">{feature}</span>
-									</div>
-								))}
-							</div>
+// 							<div className="space-y-3 mb-6">
+// 								{option.features.map((feature, idx) => (
+// 									<div key={idx} className="flex items-start">
+// 										<CheckCircle size={18} className="text-green-500 mr-3 mt-0.5 flex-shrink-0" />
+// 										<span className="text-gray-700">{feature}</span>
+// 									</div>
+// 								))}
+// 							</div>
 
-							<div className="text-center">
-								<div className={`inline-block px-4 py-2 rounded-lg font-medium ${selectedOption === option.id
-									? 'bg-gradient-to-r from-pink-500 to-rose-500 text-white'
-									: 'bg-white/80 text-gray-700 border border-gray-200'
-									}`}>
-									{selectedOption === option.id ? '✓ Выбрано' : 'Выбрать вариант'}
-								</div>
-							</div>
-						</div>
-					))}
-				</div>
+// 							<div className="text-center">
+// 								<div className={`inline-block px-4 py-2 rounded-lg font-medium ${selectedOption === option.id
+// 									? 'bg-gradient-to-r from-pink-500 to-rose-500 text-white'
+// 									: 'bg-white/80 text-gray-700 border border-gray-200'
+// 									}`}>
+// 									{selectedOption === option.id ? '✓ Выбрано' : 'Выбрать вариант'}
+// 								</div>
+// 							</div>
+// 						</div>
+// 					))}
+// 				</div>
 
-				{/* Детали выбранного предложения */}
-				<div className="bg-white rounded-3xl shadow-2xl p-8 border border-pink-100">
-					<div className="flex flex-col lg:flex-row items-center justify-between">
-						<div className="lg:w-2/3 mb-8 lg:mb-0">
-							<h3 className="text-2xl font-bold text-gray-900 font-serif mb-4">
-								{selected?.name} — экономия и комфорт на весь год
-							</h3>
+// 				{/* Детали выбранного предложения */}
+// 				<div className="bg-white rounded-3xl shadow-2xl p-8 border border-pink-100">
+// 					<div className="flex flex-col lg:flex-row items-center justify-between">
+// 						<div className="lg:w-2/3 mb-8 lg:mb-0">
+// 							<h3 className="text-2xl font-bold text-gray-900 font-serif mb-4">
+// 								{selected?.name} — экономия и комфорт на весь год
+// 							</h3>
 
-							<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-								<div className="flex items-start">
-									<div className="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-										<Zap className="text-pink-600" size={24} />
-									</div>
-									<div>
-										<h4 className="font-bold text-gray-900 mb-1">Выгода очевидна</h4>
-										<p className="text-gray-600 text-sm">
-											При разовой оплате 12 процедур вы экономите {selected?.id === 'premium' ? '6 000₽' : selected?.id === 'installment' ? '4 000₽' : '0₽'}.
-											Это как получить {selected?.id === 'premium' ? '3 процедуры' : selected?.id === 'installment' ? '2 процедуры' : '0'} в подарок!
-										</p>
-									</div>
-								</div>
+// 							<div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+// 								<div className="flex items-start">
+// 									<div className="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+// 										<Zap className="text-pink-600" size={24} />
+// 									</div>
+// 									<div>
+// 										<h4 className="font-bold text-gray-900 mb-1">Выгода очевидна</h4>
+// 										<p className="text-gray-600 text-sm">
+// 											При разовой оплате 12 процедур вы экономите {selected?.id === 'premium' ? '6 000₽' : selected?.id === 'installment' ? '4 000₽' : '0₽'}.
+// 											Это как получить {selected?.id === 'premium' ? '3 процедуры' : selected?.id === 'installment' ? '2 процедуры' : '0'} в подарок!
+// 										</p>
+// 									</div>
+// 								</div>
 
-								<div className="flex items-start">
-									<div className="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-										<Calendar className="text-pink-600" size={24} />
-									</div>
-									<div>
-										<h4 className="font-bold text-gray-900 mb-1">Приоритетная запись</h4>
-										<p className="text-gray-600 text-sm">
-											Клиенты с абонементом записываются вне очереди на самое удобное время,
-											даже в пиковые часы и выходные дни.
-										</p>
-									</div>
-								</div>
+// 								<div className="flex items-start">
+// 									<div className="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+// 										<Calendar className="text-pink-600" size={24} />
+// 									</div>
+// 									<div>
+// 										<h4 className="font-bold text-gray-900 mb-1">Приоритетная запись</h4>
+// 										<p className="text-gray-600 text-sm">
+// 											Клиенты с абонементом записываются вне очереди на самое удобное время,
+// 											даже в пиковые часы и выходные дни.
+// 										</p>
+// 									</div>
+// 								</div>
 
-								<div className="flex items-start">
-									<div className="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-										<StarIcon className="text-pink-600" size={24} />
-									</div>
-									<div>
-										<h4 className="font-bold text-gray-900 mb-1">Эксклюзивный уход</h4>
-										<p className="text-gray-600 text-sm">
-											Получите набор premium-средств для домашнего ухода стоимостью 2 500₽
-											в подарок при покупке годового абонемента.
-										</p>
-									</div>
-								</div>
+// 								<div className="flex items-start">
+// 									<div className="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+// 										<StarIcon className="text-pink-600" size={24} />
+// 									</div>
+// 									<div>
+// 										<h4 className="font-bold text-gray-900 mb-1">Эксклюзивный уход</h4>
+// 										<p className="text-gray-600 text-sm">
+// 											Получите набор premium-средств для домашнего ухода стоимостью 2 500₽
+// 											в подарок при покупке годового абонемента.
+// 										</p>
+// 									</div>
+// 								</div>
 
-								<div className="flex items-start">
-									<div className="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
-										<Tag className="text-pink-600" size={24} />
-									</div>
-									<div>
-										<h4 className="font-bold text-gray-900 mb-1">Гибкие условия</h4>
-										<p className="text-gray-600 text-sm">
-											Возможность заморозить абонемент на 1 месяц при необходимости.
-											Все процедуры остаются за вами.
-										</p>
-									</div>
-								</div>
-							</div>
+// 								<div className="flex items-start">
+// 									<div className="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+// 										<Tag className="text-pink-600" size={24} />
+// 									</div>
+// 									<div>
+// 										<h4 className="font-bold text-gray-900 mb-1">Гибкие условия</h4>
+// 										<p className="text-gray-600 text-sm">
+// 											Возможность заморозить абонемент на 1 месяц при необходимости.
+// 											Все процедуры остаются за вами.
+// 										</p>
+// 									</div>
+// 								</div>
+// 							</div>
 
-							<div className="bg-gradient-to-r from-pink-50 to-rose-50 rounded-xl p-5 border border-pink-100">
-								<h4 className="font-bold text-gray-900 mb-2 flex items-center">
-									<Sparkles className="mr-2 text-pink-600" />
-									Бонус для быстрых решений
-								</h4>
-								<p className="text-gray-700">
-									При оформлении абонемента до конца месяца — дополнительная скидка 5%
-									и бесплатная процедура аппаратного ухода за кожей!
-								</p>
-							</div>
-						</div>
+// 							<div className="bg-gradient-to-r from-pink-50 to-rose-50 rounded-xl p-5 border border-pink-100">
+// 								<h4 className="font-bold text-gray-900 mb-2 flex items-center">
+// 									<Sparkles className="mr-2 text-pink-600" />
+// 									Бонус для быстрых решений
+// 								</h4>
+// 								<p className="text-gray-700">
+// 									При оформлении абонемента до конца месяца — дополнительная скидка 5%
+// 									и бесплатная процедура аппаратного ухода за кожей!
+// 								</p>
+// 							</div>
+// 						</div>
 
-						<div className="lg:w-1/3">
-							<div className="bg-gradient-to-br from-pink-500 to-rose-500 rounded-2xl p-1 shadow-2xl">
-								<div className="bg-white rounded-2xl p-6 text-center">
-									<div className="mb-4">
-										<div className="text-4xl font-bold text-gray-900 font-serif mb-2">
-											{selected?.price.toLocaleString()}₽
-										</div>
-										<div className="text-gray-600 mb-1">за {selected?.period}</div>
-										{selected?.id === 'standard' && (
-											<div className="text-sm text-gray-500">Итого: 24 000₽ за год</div>
-										)}
-										{selected?.id === 'premium' && (
-											<div className="text-green-600 font-bold">
-												Экономия 6 000₽
-											</div>
-										)}
-										{selected?.id === 'installment' && (
-											<div className="text-green-600 font-bold">
-												Экономия 4 000₽
-											</div>
-										)}
-									</div>
+// 						<div className="lg:w-1/3">
+// 							<div className="bg-gradient-to-br from-pink-500 to-rose-500 rounded-2xl p-1 shadow-2xl">
+// 								<div className="bg-white rounded-2xl p-6 text-center">
+// 									<div className="mb-4">
+// 										<div className="text-4xl font-bold text-gray-900 font-serif mb-2">
+// 											{selected?.price.toLocaleString()}₽
+// 										</div>
+// 										<div className="text-gray-600 mb-1">за {selected?.period}</div>
+// 										{selected?.id === 'standard' && (
+// 											<div className="text-sm text-gray-500">Итого: 24 000₽ за год</div>
+// 										)}
+// 										{selected?.id === 'premium' && (
+// 											<div className="text-green-600 font-bold">
+// 												Экономия 6 000₽
+// 											</div>
+// 										)}
+// 										{selected?.id === 'installment' && (
+// 											<div className="text-green-600 font-bold">
+// 												Экономия 4 000₽
+// 											</div>
+// 										)}
+// 									</div>
 
-									<div className="space-y-4 mb-6">
-										<a
-											href="#contact"
-											className="block w-full bg-gradient-to-r from-pink-500 to-rose-500 text-white py-3 rounded-xl font-medium hover:shadow-xl hover:scale-105 transition-all duration-300 shadow-lg"
-										>
-											Оформить абонемент
-										</a>
+// 									<div className="space-y-4 mb-6">
+// 										<a
+// 											href="#contact"
+// 											className="block w-full bg-gradient-to-r from-pink-500 to-rose-500 text-white py-3 rounded-xl font-medium hover:shadow-xl hover:scale-105 transition-all duration-300 shadow-lg"
+// 										>
+// 											Оформить абонемент
+// 										</a>
 
-										<a
-											href="tel:+79161234567"
-											className="block w-full bg-white text-pink-600 py-3 rounded-xl font-medium border-2 border-pink-200 hover:bg-pink-50 transition-all duration-300"
-										>
-											<div className="flex items-center justify-center">
-												<Phone size={18} className="mr-2" />
-												Консультация по абонементу
-											</div>
-										</a>
-									</div>
+// 										<a
+// 											href="tel:+79161234567"
+// 											className="block w-full bg-white text-pink-600 py-3 rounded-xl font-medium border-2 border-pink-200 hover:bg-pink-50 transition-all duration-300"
+// 										>
+// 											<div className="flex items-center justify-center">
+// 												<Phone size={18} className="mr-2" />
+// 												Консультация по абонементу
+// 											</div>
+// 										</a>
+// 									</div>
 
-									<p className="text-xs text-gray-500">
-										*Абонемент действует 12 месяцев с даты первой процедуры.<br />
-										**Возможна заморозка на 30 дней.
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+// 									<p className="text-xs text-gray-500">
+// 										*Абонемент действует 12 месяцев с даты первой процедуры.<br />
+// 										**Возможна заморозка на 30 дней.
+// 									</p>
+// 								</div>
+// 							</div>
+// 						</div>
+// 					</div>
+// 				</div>
 
-				{/* Таблица сравнения */}
-				<div className="mt-12 bg-white rounded-3xl shadow-xl p-6">
-					<h3 className="text-2xl font-bold text-gray-900 font-serif mb-6 text-center">
-						Сравнение вариантов
-					</h3>
+// 				{/* Таблица сравнения */}
+// 				<div className="mt-12 bg-white rounded-3xl shadow-xl p-6">
+// 					<h3 className="text-2xl font-bold text-gray-900 font-serif mb-6 text-center">
+// 						Сравнение вариантов
+// 					</h3>
 
-					<div className="overflow-x-auto">
-						<table className="w-full">
-							<thead>
-								<tr className="border-b">
-									<th className="text-left py-4 font-semibold text-gray-900">Что получаете</th>
-									<th className="text-center py-4 px-2">
-										<div className="font-semibold text-gray-900">Разовые визиты</div>
-										<div className="text-sm text-gray-600">2 000₽/месяц</div>
-									</th>
-									<th className="text-center py-4 px-2 bg-gradient-to-b from-yellow-50 to-orange-50 rounded-t-lg">
-										<div className="font-semibold text-gray-900">Годовой абонемент</div>
-										<div className="text-sm text-gray-600">18 000₽/год</div>
-									</th>
-									<th className="text-center py-4 px-2">
-										<div className="font-semibold text-gray-900">Рассрочка</div>
-										<div className="text-sm text-gray-600">5 000₽/3 мес</div>
-									</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr className="border-b">
-									<td className="py-4 font-medium">Стоимость 12 процедур</td>
-									<td className="text-center py-4">
-										<div className="line-through text-gray-500">24 000₽</div>
-									</td>
-									<td className="text-center py-4 bg-gradient-to-b from-yellow-50 to-orange-50">
-										<div className="text-green-600 font-bold">18 000₽</div>
-										<div className="text-sm text-green-600">-25%</div>
-									</td>
-									<td className="text-center py-4">
-										<div className="text-green-600 font-bold">20 000₽</div>
-										<div className="text-sm text-green-600">-17%</div>
-									</td>
-								</tr>
-								<tr className="border-b">
-									<td className="py-4 font-medium">Приоритетная запись</td>
-									<td className="text-center py-4">—</td>
-									<td className="text-center py-4 bg-gradient-to-b from-yellow-50 to-orange-50">
-										<CheckCircle className="inline text-green-500" size={20} />
-									</td>
-									<td className="text-center py-4">
-										<CheckCircle className="inline text-green-500" size={20} />
-									</td>
-								</tr>
-								<tr className="border-b">
-									<td className="py-4 font-medium">Подарочный набор ухода</td>
-									<td className="text-center py-4">—</td>
-									<td className="text-center py-4 bg-gradient-to-b from-yellow-50 to-orange-50">
-										<div className="text-green-600 font-medium">2 500₽</div>
-									</td>
-									<td className="text-center py-4">
-										<div className="text-green-600 font-medium">2 500₽</div>
-									</td>
-								</tr>
-								<tr className="border-b">
-									<td className="py-4 font-medium">Заморозка абонемента</td>
-									<td className="text-center py-4">—</td>
-									<td className="text-center py-4 bg-gradient-to-b from-yellow-50 to-orange-50">
-										<div className="text-gray-700">30 дней</div>
-									</td>
-									<td className="text-center py-4">
-										<div className="text-gray-700">30 дней</div>
-									</td>
-								</tr>
-								<tr>
-									<td className="py-4 font-medium">Итоговая экономия</td>
-									<td className="text-center py-4">
-										<div className="text-gray-500">0₽</div>
-									</td>
-									<td className="text-center py-4 bg-gradient-to-b from-yellow-50 to-orange-50">
-										<div className="text-green-600 font-bold">8 500₽</div>
-										<div className="text-sm">(6 000₽ + 2 500₽)</div>
-									</td>
-									<td className="text-center py-4">
-										<div className="text-green-600 font-bold">6 500₽</div>
-										<div className="text-sm">(4 000₽ + 2 500₽)</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
+// 					<div className="overflow-x-auto">
+// 						<table className="w-full">
+// 							<thead>
+// 								<tr className="border-b">
+// 									<th className="text-left py-4 font-semibold text-gray-900">Что получаете</th>
+// 									<th className="text-center py-4 px-2">
+// 										<div className="font-semibold text-gray-900">Разовые визиты</div>
+// 										<div className="text-sm text-gray-600">2 000₽/месяц</div>
+// 									</th>
+// 									<th className="text-center py-4 px-2 bg-gradient-to-b from-yellow-50 to-orange-50 rounded-t-lg">
+// 										<div className="font-semibold text-gray-900">Годовой абонемент</div>
+// 										<div className="text-sm text-gray-600">18 000₽/год</div>
+// 									</th>
+// 									<th className="text-center py-4 px-2">
+// 										<div className="font-semibold text-gray-900">Рассрочка</div>
+// 										<div className="text-sm text-gray-600">5 000₽/3 мес</div>
+// 									</th>
+// 								</tr>
+// 							</thead>
+// 							<tbody>
+// 								<tr className="border-b">
+// 									<td className="py-4 font-medium">Стоимость 12 процедур</td>
+// 									<td className="text-center py-4">
+// 										<div className="line-through text-gray-500">24 000₽</div>
+// 									</td>
+// 									<td className="text-center py-4 bg-gradient-to-b from-yellow-50 to-orange-50">
+// 										<div className="text-green-600 font-bold">18 000₽</div>
+// 										<div className="text-sm text-green-600">-25%</div>
+// 									</td>
+// 									<td className="text-center py-4">
+// 										<div className="text-green-600 font-bold">20 000₽</div>
+// 										<div className="text-sm text-green-600">-17%</div>
+// 									</td>
+// 								</tr>
+// 								<tr className="border-b">
+// 									<td className="py-4 font-medium">Приоритетная запись</td>
+// 									<td className="text-center py-4">—</td>
+// 									<td className="text-center py-4 bg-gradient-to-b from-yellow-50 to-orange-50">
+// 										<CheckCircle className="inline text-green-500" size={20} />
+// 									</td>
+// 									<td className="text-center py-4">
+// 										<CheckCircle className="inline text-green-500" size={20} />
+// 									</td>
+// 								</tr>
+// 								<tr className="border-b">
+// 									<td className="py-4 font-medium">Подарочный набор ухода</td>
+// 									<td className="text-center py-4">—</td>
+// 									<td className="text-center py-4 bg-gradient-to-b from-yellow-50 to-orange-50">
+// 										<div className="text-green-600 font-medium">2 500₽</div>
+// 									</td>
+// 									<td className="text-center py-4">
+// 										<div className="text-green-600 font-medium">2 500₽</div>
+// 									</td>
+// 								</tr>
+// 								<tr className="border-b">
+// 									<td className="py-4 font-medium">Заморозка абонемента</td>
+// 									<td className="text-center py-4">—</td>
+// 									<td className="text-center py-4 bg-gradient-to-b from-yellow-50 to-orange-50">
+// 										<div className="text-gray-700">30 дней</div>
+// 									</td>
+// 									<td className="text-center py-4">
+// 										<div className="text-gray-700">30 дней</div>
+// 									</td>
+// 								</tr>
+// 								<tr>
+// 									<td className="py-4 font-medium">Итоговая экономия</td>
+// 									<td className="text-center py-4">
+// 										<div className="text-gray-500">0₽</div>
+// 									</td>
+// 									<td className="text-center py-4 bg-gradient-to-b from-yellow-50 to-orange-50">
+// 										<div className="text-green-600 font-bold">8 500₽</div>
+// 										<div className="text-sm">(6 000₽ + 2 500₽)</div>
+// 									</td>
+// 									<td className="text-center py-4">
+// 										<div className="text-green-600 font-bold">6 500₽</div>
+// 										<div className="text-sm">(4 000₽ + 2 500₽)</div>
+// 									</td>
+// 								</tr>
+// 							</tbody>
+// 						</table>
+// 					</div>
+// 				</div>
 
-				<div className="text-center mt-12">
-					<p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-						Более 85% моих постоянных клиентов выбирают годовой абонемент —
-						это выгодно, удобно и гарантирует регулярный профессиональный уход.
-					</p>
-					<a
-						href="#contact"
-						onClick={(e) => scrollToSection(e, 'contact')}
-						className="inline-flex items-center bg-gradient-to-r from-pink-500 to-rose-500 text-white px-8 py-4 rounded-xl font-medium hover:shadow-2xl hover:scale-105 transition-all duration-300 text-lg shadow-xl"
-					>
-						<Calendar className="mr-3" />
-						Забронировать абонемент на 2025 год
-					</a>
-				</div>
-			</div>
-		</section>
-	);
-}
+// 				<div className="text-center mt-12">
+// 					<p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+// 						Более 85% моих постоянных клиентов выбирают годовой абонемент —
+// 						это выгодно, удобно и гарантирует регулярный профессиональный уход.
+// 					</p>
+// 					<a
+// 						href="#contact"
+// 						onClick={(e) => scrollToSection(e, 'contact')}
+// 						className="inline-flex items-center bg-gradient-to-r from-pink-500 to-rose-500 text-white px-8 py-4 rounded-xl font-medium hover:shadow-2xl hover:scale-105 transition-all duration-300 text-lg shadow-xl"
+// 					>
+// 						<Calendar className="mr-3" />
+// 						Забронировать абонемент на 2025 год
+// 					</a>
+// 				</div>
+// 			</div>
+// 		</section>
+// 	);
+// }
 
 // Стильные иконки для кнопок
 const PremiumIcon = () => (
@@ -821,107 +822,79 @@ function App() {
 
 			{/* Герой-секция */}
 			<section className="container mx-auto px-4 sm:px-6 pt-8 pb-12 md:pt-16 md:pb-24">
-				<div className="flex flex-col lg:flex-row items-center">
-					<FadeIn delay={100} className="lg:w-1/2 mb-12 lg:mb-0">
-						<div className="mb-8">
-							<div className="inline-flex items-center bg-gradient-to-r from-pink-100 to-rose-100 text-pink-700 px-4 py-2.5 rounded-full text-sm font-medium mb-6 font-sans shadow-sm border border-pink-200">
-								<Award className="mr-2" size={16} />
-								<span>10+ лет профессионального опыта</span>
-							</div>
-							<h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 font-serif leading-tight">
-								Идеальная гладкость кожи с{' '}
-								<span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-rose-500 to-fuchsia-500">
-									профессиональным шугарингом
-								</span>
-							</h1>
-						</div>
-						<p className="text-lg text-gray-600 mb-10 leading-relaxed max-w-2xl">
-							Более 10 лет создаю безупречную гладкость вашей кожи с использованием
-							авторских безболезненных техник и натуральных составов премиум-класса.
-						</p>
-						<div className="flex flex-col sm:flex-row gap-4 mb-12">
-							{/* <PrimaryButton href="#contact" icon="sparkles" sectionId="contact">
-                Записаться онлайн
-              </PrimaryButton>
-              <SecondaryButton href="#services" sectionId="services">
-                Посмотреть услуги
-              </SecondaryButton> */}
-						</div>
+    <div className="flex flex-col lg:flex-row items-center">
+        <FadeIn delay={100} className="lg:w-1/2 mb-12 lg:mb-0">
+            <div className="mb-8">
+                <div className="inline-flex items-center bg-gradient-to-r from-pink-100 to-rose-100 text-pink-700 px-4 py-2.5 rounded-full text-sm font-medium mb-6 font-sans shadow-sm border border-pink-200">
+                    <Award className="mr-2" size={16} />
+                    <span>10+ лет профессионального опыта</span>
+                </div>
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 font-serif leading-tight">
+                    Идеальная гладкость кожи с{' '}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-rose-500 to-fuchsia-500">
+                        профессиональным шугарингом
+                    </span>
+                </h1>
+            </div>
+            <p className="text-lg text-gray-600 mb-10 leading-relaxed max-w-2xl">
+                Более 10 лет создаю безупречную гладкость вашей кожи с использованием
+                авторских безболезненных техник и натуральных составов премиум-класса.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 mb-12">
+                {/* Кнопки остаются без изменений */}
+            </div>
 
-						{/* Статистика */}
-						<div className="grid grid-cols-3 gap-4 max-w-md">
-							<div className="text-center p-4 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm border border-pink-100">
-								<div className="text-2xl sm:text-3xl font-bold text-pink-600 font-serif">5000+</div>
-								<div className="text-gray-600 text-sm">успешных процедур</div>
-							</div>
-							<div className="text-center p-4 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm border border-pink-100">
-								<div className="text-2xl sm:text-3xl font-bold text-pink-600 font-serif">98%</div>
-								<div className="text-gray-600 text-sm">довольных клиентов</div>
-							</div>
-							<div className="text-center p-4 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm border border-pink-100">
-								<div className="text-2xl sm:text-3-xl font-bold text-pink-600 font-serif">4.9/5</div>
-								<div className="text-gray-600 text-sm">рейтинг эксперта</div>
-							</div>
-						</div>
-					</FadeIn>
+            {/* Статистика */}
+            <div className="grid grid-cols-3 gap-4 max-w-md">
+                <div className="text-center p-4 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm border border-pink-100">
+                    <div className="text-2xl sm:text-3xl font-bold text-pink-600 font-serif">5000+</div>
+                    <div className="text-gray-600 text-sm">успешных процедур</div>
+                </div>
+                <div className="text-center p-4 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm border border-pink-100">
+                    <div className="text-2xl sm:text-3xl font-bold text-pink-600 font-serif">98%</div>
+                    <div className="text-gray-600 text-sm">довольных клиентов</div>
+                </div>
+                <div className="text-center p-4 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm border border-pink-100">
+                    <div className="text-2xl sm:text-3xl font-bold text-pink-600 font-serif">4.9/5</div>
+                    <div className="text-gray-600 text-sm">рейтинг эксперта</div>
+                </div>
+            </div>
+        </FadeIn>
 
-					<FadeIn delay={300} className="lg:w-1/2 relative">
-						<div className="relative mx-auto max-w-md">
-							<div className="bg-gradient-to-br from-pink-400 via-rose-400 to-fuchsia-400 rounded-3xl p-1.5 shadow-2xl shadow-pink-500/30">
-								<div className="bg-white rounded-3xl overflow-hidden shadow-xl">
-									<div className="h-56 sm:h-64 bg-gradient-to-br from-pink-200 to-rose-200 relative overflow-hidden">
-										<img
-											src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1180&q=80"
-											alt="Мастер шугаринга за работой"
-											className="w-full h-full object-cover"
-										/>
-										<div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-sm font-medium">
-											<TrendingUp size={14} className="inline mr-1" />
-											Эксперт
-										</div>
-									</div>
-									<div className="p-6">
-										<div className="flex items-center mb-4">
-											<div className="w-16 h-16 rounded-full overflow-hidden border-4 border-white shadow-lg relative">
-												<img
-													src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=761&q=80"
-													alt="Ирина, мастер шугаринга"
-													className="w-full h-full object-cover"
-												/>
-												<div className="absolute -inset-1 border-2 border-pink-300 rounded-full animate-ping opacity-20"></div>
-											</div>
-											<div className="ml-4">
-												<h3 className="text-xl font-bold text-gray-900 font-serif">Ирина Сорокина</h3>
-												<p className="text-gray-600 text-sm">Мастер-эксперт шугаринга</p>
-												<div className="flex items-center mt-1">
-													{[...Array(5)].map((_, i) => (
-														<Star key={i} size={16} className="fill-yellow-400 text-yellow-400" />
-													))}
-													<span className="ml-2 font-medium text-gray-700">4.9/5</span>
-												</div>
-											</div>
-										</div>
-										<div className="grid grid-cols-2 gap-3 text-sm">
-											<div className="flex items-center bg-pink-50 rounded-lg p-2">
-												<CheckCircle className="text-green-500 mr-2" size={18} />
-												<span className="font-medium">5000+ процедур</span>
-											</div>
-											<div className="flex items-center bg-pink-50 rounded-lg p-2">
-												<CheckCircle className="text-green-500 mr-2" size={18} />
-												<span className="font-medium">10 лет опыта</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+        <FadeIn delay={300} className="lg:w-1/2 relative">
+            <div className="relative mx-auto max-w-md">
+                {/* Мягкая карточка с теплыми акцентами */}
+                <div className="bg-gradient-to-br from-white to-pink-50 rounded-3xl p-6 shadow-xl shadow-pink-100 border border-pink-100">
+                    {/* Фото мастера в мягком оформлении */}
+                    <div className="relative mb-6">
+                        <div className="relative mx-auto w-48 h-48 rounded-full overflow-hidden border-8 border-white shadow-lg">
+                            <img
+                                src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=761&q=80"
+                                alt="Ирина, мастер шугаринга"
+                                className="w-full h-full object-cover"
+                            />
+                        </div>
+                        {/* Декоративный элемент вокруг фото */}
+                        <div className="absolute -inset-4 border-2 border-pink-200 rounded-full opacity-40"></div>
+                    </div>
 
-							{/* Декоративные элементы */}
-							<div className="absolute -top-4 -left-4 w-20 h-20 sm:w-24 sm:h-24 bg-pink-200/50 rounded-full -z-10 opacity-70 animate-pulse blur-sm"></div>
-							<div className="absolute -bottom-6 -right-6 w-28 h-28 sm:w-32 sm:h-32 bg-rose-200/50 rounded-full -z-10 opacity-70 animate-pulse delay-1000 blur-sm"></div>
-						</div>
-					</FadeIn>
-				</div>
-			</section>
+                    {/* Информация о мастере */}
+                    <div className="text-center mb-6">
+                        <h3 className="text-2xl font-bold text-gray-900 font-serif mb-2">Ирина Сорокина</h3>                        
+                       
+                        
+                        {/* Короткое душевное описание */}
+                        <p className="text-gray-600 text-sm italic mb-6 max-w-md mx-auto">
+                            "Для меня шугаринг — это не просто процедура, а искусство создания комфорта 
+                            и уверенности в себе для каждой женщины"
+                        </p>
+                    </div>                  
+                </div>
+            </div>
+        </FadeIn>
+    </div>
+</section>
+			
 			{/* <NewYearBanner />
 			<NewYearBanner1 />
 			<NewYearBanner2 />
@@ -929,7 +902,7 @@ function App() {
 			<NewYearBanner5 />
 			{/* <NewYearBanner2 /> */}
 			{/* Коммерческое предложение по абонементу */}
-			<YearSubscriptionOffer />
+			{/* <YearSubscriptionOffer /> */}
 
 			{/* Услуги с каскадным эффектом */}
 			<section id="services" className="container mx-auto px-4 py-16">
@@ -1251,16 +1224,17 @@ function App() {
 											></textarea>
 										</div>
 
-										<div>
+										{/* <div>
 											<div className="relative">
 												<div className="g-recaptcha overflow-hidden w-full" style={{ transform: 'scale(0.95)', transformOrigin: '0 0' }}>
 													<ReCAPTCHA
 														sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
 														onChange={onCaptchaChange}
 													/>
-												</div>											
+												</div>
+											
 											</div>
-										</div>
+										</div> */}
 
 										<button
 											type="submit"

@@ -48,7 +48,7 @@ const scrollToSection = (e, sectionId) => {
 	}
 }
 
-import { NewYearBanner, NewYearBanner1, NewYearBanner2, NewYearBanner3, NewYearBanner4 } from './Bunners';
+import { NewYearBanner, NewYearBanner1, NewYearBanner2, NewYearBanner3, NewYearBanner4, NewYearBanner5 } from './Bunners';
 
 
 const YearSubscriptionOffer = () => {
@@ -697,6 +697,15 @@ function App() {
 	const [captchaError, setCaptchaError] = useState('');
 
 	const { register, handleSubmit, formState: { errors }, reset } = useForm();
+	const [showCaptchaError, setShowCaptchaError] = useState(false);
+	const validateForm = () => {
+		if (!captchaValue) {
+			setCaptchaError("Пожалуйста, подтвердите, что вы не робот");
+			setShowCaptchaError(true);
+			return false;
+		}
+		return true;
+	};
 
 	const onSubmit = async (data) => {
 		if (!captchaValue) {
@@ -917,7 +926,7 @@ function App() {
 			<NewYearBanner1 />
 			<NewYearBanner2 />
 			<NewYearBanner3 /> */}
-			<NewYearBanner4 />
+			<NewYearBanner5 />
 			{/* <NewYearBanner2 /> */}
 			{/* Коммерческое предложение по абонементу */}
 			<YearSubscriptionOffer />
@@ -1249,15 +1258,7 @@ function App() {
 														sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
 														onChange={onCaptchaChange}
 													/>
-												</div>
-												{captchaError && (
-													<div className="mt-2 p-3 bg-red-50 border border-red-200 rounded-lg">
-														<p className="text-red-600 text-sm flex items-center">
-															<span className="w-2 h-2 bg-red-600 rounded-full mr-2"></span>
-															{captchaError}
-														</p>
-													</div>
-												)}
+												</div>											
 											</div>
 										</div>
 

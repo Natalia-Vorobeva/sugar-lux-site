@@ -877,3 +877,180 @@ export const NewYearBanner4 = () => {
 	);
 }
 
+export const NewYearBanner5 = () => {
+	const [isVisible, setIsVisible] = useState(true);
+	const [daysLeft, setDaysLeft] = useState(0);
+
+	useEffect(() => {
+		const now = new Date();
+		const newYear = new Date(now.getFullYear() + 1, 0, 1);
+		const diff = Math.ceil((newYear.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+		// eslint-disable-next-line react-hooks/set-state-in-effect
+		setDaysLeft(diff);
+
+		if (now.getMonth() === 0 && now.getDate() < 10) {
+			setIsVisible(false);
+		}
+	}, []);
+
+	if (!isVisible) return null;
+
+	return (
+		<div className="relative my-6 md:my-8 overflow-hidden">
+			<div className="relative bg-gradient-to-r from-pink-50 via-rose-50 to-lavender-50 rounded-2xl md:rounded-3xl p-1 shadow-lg border border-white/80">
+				{/* Легкий блестящий бордюр */}
+				<div className="absolute inset-0 bg-gradient-to-r from-pink-200 via-rose-200 to-lavender-200 opacity-50 blur-sm"></div>
+
+				<div className="relative bg-gradient-to-br from-white/90 via-white/95 to-white/90 rounded-2xl md:rounded-3xl overflow-hidden backdrop-blur-sm">
+					{/* Декоративные линии */}
+					<div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-pink-300 to-transparent animate-pulse"></div>
+					<div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-lavender-300 to-transparent animate-pulse"></div>
+
+					{/* Фоновые элементы - снежинки и пузырьки */}
+					<div className="absolute top-4 right-8 w-24 h-24 bg-gradient-to-br from-pink-200/30 to-rose-200/30 rounded-full blur-lg"></div>
+					<div className="absolute bottom-8 left-8 w-32 h-32 bg-gradient-to-tr from-lavender-200/30 to-pink-200/30 rounded-full blur-lg"></div>
+					<div className="absolute top-1/4 left-1/4 w-16 h-16 bg-gradient-to-br from-blue-100/20 to-cyan-100/20 rounded-full blur-md"></div>
+
+					{/* Точки как конфетти */}
+					<div className="absolute top-10 right-20 w-2 h-2 bg-pink-300 rounded-full"></div>
+					<div className="absolute bottom-16 left-24 w-3 h-3 bg-rose-300 rounded-full"></div>
+					<div className="absolute top-32 left-32 w-2 h-2 bg-lavender-300 rounded-full"></div>
+
+					<div className="container mx-auto px-4 py-8 md:py-10 relative z-10">
+						<div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+							<div className="lg:w-3/5">
+								<div className="flex items-start mb-6">
+									<div className="mr-5">
+										<div className="relative">
+											<div className="w-20 h-20 bg-gradient-to-br from-pink-300 to-rose-300 rounded-2xl flex items-center justify-center shadow-lg shadow-pink-200 rotate-45">
+												<div className="rotate-45 text-center">
+													<span className="text-2xl font-bold text-white block">-25%</span>
+													<span className="text-xs text-pink-50 block">СКИДКА</span>
+												</div>
+											</div>
+											<div className="absolute -inset-2 border-2 border-pink-300/30 rounded-2xl animate-ping"></div>
+										</div>
+									</div>
+									<div className="flex-1">
+										<div className="inline-flex items-center bg-gradient-to-r from-pink-100 to-rose-100 backdrop-blur-sm border border-pink-200 text-pink-700 px-4 py-2 rounded-full text-sm font-medium mb-4">
+											<Sparkles size={14} className="mr-2" />
+											ЭКСКЛЮЗИВНОЕ ПРЕДЛОЖЕНИЕ 2025
+										</div>
+										<h2 className="text-3xl md:text-4xl font-bold text-gray-800 font-serif leading-tight mb-3">
+											Годовой абонемент премиум
+											<span className="block text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-rose-500 to-lavender-500">
+												"Все включено"
+											</span>
+										</h2>
+										<p className="text-gray-600 text-lg mb-6 max-w-2xl">
+											Полный уход за кожей на весь год по специальной цене.
+											Идеальная инвестиция в свою красоту и уверенность.
+										</p>
+									</div>
+								</div>
+
+								<div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+									<div className="text-center p-4 bg-white/60 backdrop-blur-sm rounded-xl border border-gray-100 shadow-sm">
+										<div className="text-2xl font-bold text-pink-500 mb-1">12</div>
+										<div className="text-sm text-gray-600">процедур</div>
+									</div>
+									<div className="text-center p-4 bg-white/60 backdrop-blur-sm rounded-xl border border-gray-100 shadow-sm">
+										<div className="text-2xl font-bold text-pink-500 mb-1">6 000₽</div>
+										<div className="text-sm text-gray-600">экономия</div>
+									</div>
+									<div className="text-center p-4 bg-white/60 backdrop-blur-sm rounded-xl border border-gray-100 shadow-sm">
+										<div className="text-2xl font-bold text-pink-500 mb-1">VIP</div>
+										<div className="text-sm text-gray-600">статус</div>
+									</div>
+									<div className="text-center p-4 bg-white/60 backdrop-blur-sm rounded-xl border border-gray-100 shadow-sm">
+										<div className="text-2xl font-bold text-pink-500 mb-1">{daysLeft}</div>
+										<div className="text-sm text-gray-600">дней осталось</div>
+									</div>
+								</div>
+
+								<div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+									<div className="flex items-center bg-gradient-to-r from-pink-50 to-rose-50 backdrop-blur-sm px-4 py-3 rounded-xl border border-pink-100">
+										<div className="mr-3">
+											<Gift className="text-pink-500" size={24} />
+										</div>
+										<div>
+											<div className="text-sm text-pink-700 font-medium">Подарок при покупке</div>
+											<div className="text-xs text-gray-500">Набор ухода 2500₽</div>
+										</div>
+									</div>
+									<div className="flex items-center bg-gradient-to-r from-pink-50 to-rose-50 backdrop-blur-sm px-4 py-3 rounded-xl border border-pink-100">
+										<div className="mr-3">
+											<Calendar className="text-pink-500" size={24} />
+										</div>
+										<div>
+											<div className="text-sm text-pink-700 font-medium">Приоритетная запись</div>
+											<div className="text-xs text-gray-500">В любое время</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div className="lg:w-2/5">
+								<div className="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-1 shadow-lg border border-gray-100">
+									<div className="bg-white rounded-2xl p-6">
+										<div className="text-center mb-6">
+											<div className="text-4xl font-bold text-gray-800 font-serif mb-2">
+												18 000₽
+											</div>
+											<div className="text-gray-600 mb-4">
+												<span className="line-through text-gray-400 mr-2">24 000₽</span>
+												<span className="text-pink-500 font-bold">-25%</span>
+											</div>
+											<div className="text-sm text-gray-500 mb-6">
+												за 12 месяцев профессионального ухода
+											</div>
+										</div>
+
+										<button
+											onClick={(e) => scrollToSection(e, 'contact')}
+											className="group relative w-full bg-gradient-to-r from-pink-400 to-rose-400 text-white py-4 rounded-xl font-bold hover:shadow-xl hover:shadow-pink-200 hover:scale-[1.02] transition-all duration-300 mb-4"
+										>
+											<div className="absolute inset-0 bg-gradient-to-r from-pink-300 to-rose-300 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+											<div className="relative z-10 flex items-center justify-center">
+												<Crown size={20} className="mr-3" />
+												<span className="text-lg">ОФОРМИТЬ ПРЕМИУМ</span>
+											</div>
+										</button>
+
+										<div className="text-center">
+											<div className="text-xs text-gray-500 mb-2">
+												Или в рассрочку: 4 платежа по 5 000₽
+											</div>
+											<div className="flex items-center justify-center text-sm text-gray-400">
+												<ShieldCheck size={14} className="mr-2" />
+												<span>100% гарантия качества</span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div className="mt-6 text-center">
+									<p className="text-xs text-gray-500">
+										*Абонемент можно подарить другу<br />
+										**Возможность заморозки на 30 дней
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<button
+						onClick={() => setIsVisible(false)}
+						className="absolute top-6 right-6 text-gray-400 hover:text-gray-600 transition-colors w-8 h-8 flex items-center justify-center bg-white/80 backdrop-blur-sm rounded-full hover:bg-white border border-gray-200 shadow-sm"
+						aria-label="Закрыть баннер"
+					>
+						<svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+						</svg>
+					</button>
+				</div>
+			</div>
+		</div>
+	);
+}
+

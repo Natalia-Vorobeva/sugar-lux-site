@@ -224,6 +224,7 @@ export const NewYearBanner5 = () => {
 			const animationIndex = i % animations.length;
 			const animationDelay = `${(i * 0.15)}s`;
 			const animationName = animations[animationIndex];
+			const animationDuration = `${2 + Math.random()}s`;
 
 			lights.push(
 				<div
@@ -232,8 +233,10 @@ export const NewYearBanner5 = () => {
 					style={{
 						left: `${position}%`,
 						top: topPosition,
-						// eslint-disable-next-line react-hooks/purity
-						animation: `ny-garland-wave ${2 + Math.random()}s infinite ease-in-out`,
+						animationName: 'ny-garland-wave',
+						animationDuration: animationDuration,
+						animationIterationCount: 'infinite',
+						animationTimingFunction: 'ease-in-out',
 						animationDelay: animationDelay
 					}}
 				>
@@ -279,68 +282,9 @@ export const NewYearBanner5 = () => {
 					<div className="container mx-auto px-4 py-8 md:py-12 relative z-10">
 						<div className="flex flex-col lg:flex-row items-center justify-between gap-10">
 							<div className="lg:w-3/5">
-								<div className="flex items-start mb-8">
-									<div className="mr-6 relative">
-										{/* Новогодний шар с вращением */}
-										<div className="relative">
-											<div className={`relative w-24 h-24 ${is3DEnabled ? 'transform-style-3d' : ''}`}>
-												{is3DEnabled ? (
-													<div className="relative w-full h-full" style={{ transformStyle: 'preserve-3d' }}>
-														<div
-															className="absolute inset-0 rounded-full ny-ball-3d"
-															style={{
-																animation: 'ny-rotate3d 8s linear infinite',
-																transformStyle: 'preserve-3d'
-															}}
-														>
-															{/* Блики на шаре */}
-															<div className="absolute ny-ball-highlight-1"></div>
-															<div className="absolute ny-ball-highlight-2"></div>
-
-															<div
-																className="absolute top-1/2 left-1/2"
-																style={{
-																	transform: 'translate(-50%, -50%)',
-																	transformStyle: 'preserve-3d',
-																	animation: 'ny-textRotate 8s linear infinite'
-																}}
-															>
-																<div className="text-center text-white font-bold ny-ball-text">
-																	<span className="text-3xl block">-25%</span>
-																	<span className="text-xs text-yellow-200 block mt-1">СКИДКА</span>
-																</div>
-															</div>
-														</div>
-														<div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-															<div className="w-4 h-8 bg-gradient-to-b from-gray-300 to-gray-200"></div>
-															<div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-6 h-2 bg-gradient-to-b from-gray-400 to-gray-300 rounded-t-full"></div>
-														</div>
-													</div>
-												) : (
-													<div
-														className="w-24 h-24 ny-ball-2d rounded-full flex items-center justify-center shadow-2xl shadow-red-400/50 relative"
-														style={{
-															animation: 'ny-gentlePulse 2s infinite ease-in-out'
-														}}
-													>
-														<div className="text-center">
-															<span className="text-3xl font-bold text-white block">-25%</span>
-															<span className="text-xs text-yellow-200 block mt-1">СКИДКА</span>
-														</div>
-														{/* Блики на шаре для плоской версии */}
-														<div className="absolute top-4 left-4 w-4 h-4 bg-white/40 rounded-full blur-sm"></div>
-														<div className="absolute bottom-6 right-6 w-3 h-3 bg-white/30 rounded-full blur-sm"></div>
-													</div>
-												)}
-											</div>
-										</div>
-										<button
-											onClick={() => setIs3DEnabled(!is3DEnabled)}
-											className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-70 hover:opacity-100 transition-opacity z-20 hover:scale-110 transition-transform"
-										>
-											{is3DEnabled ? 'Переключить на 2D' : 'Переключить на 3D'}
-										</button>
-									</div>
+								<div className="flex items-start mb-8">								
+									
+									
 									<div className="flex-1">
 										<h2 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight ny-title">
 											Годовой абонемент
@@ -418,7 +362,10 @@ export const NewYearBanner5 = () => {
 														className="w-2 h-2 rounded-full"
 														style={{
 															backgroundColor: color,
-															animation: `ny-twinkle ${1 + i * 0.5}s infinite alternate`,
+															animationName: 'ny-twinkle',
+															animationDuration: `${1 + i * 0.5}s`,
+															animationIterationCount: 'infinite',
+															animationDirection: 'alternate',
 															animationDelay: `${i * 0.2}s`
 														}}
 													></div>

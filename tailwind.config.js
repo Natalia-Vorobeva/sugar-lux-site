@@ -11,8 +11,6 @@ export default {
         'fade-in-up': 'fadeInUp 0.6s ease-out',
         'fade-in-right': 'fadeInRight 0.6s ease-out',
         'fade-in-left': 'fadeInLeft 0.6s ease-out',
-				'spin-slow': 'spin 3s linear infinite',
-        'swing': 'swing 3s ease-in-out infinite',
       },
       keyframes: {
         fadeInUp: {
@@ -22,14 +20,6 @@ export default {
         fadeInRight: {
           '0%': { opacity: '0', transform: 'translateX(20px)' },
           '100%': { opacity: '1', transform: 'translateX(0)' },
-        },
-        fadeInLeft: {
-          '0%': { opacity: '0', transform: 'translateX(-20px)' },
-          '100%': { opacity: '1', transform: 'translateX(0)' },
-        },
-				 swing: {
-          '0%, 100%': { transform: 'rotate(-5deg)' },
-          '50%': { transform: 'rotate(5deg)' },
         },
       }
     },

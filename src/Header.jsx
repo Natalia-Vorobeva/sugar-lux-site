@@ -28,6 +28,13 @@ import {
 	Clock4,
 	Gem,
 } from 'lucide-react';
+import { scrollToSection} from './utils.js'
+
+const handleMobileNavClick = (e, sectionId) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+    scrollToSection(e, sectionId);
+  }
 
 const HeaderLogo = ({ size = 40 }) => {
 	return (
@@ -41,22 +48,8 @@ const HeaderLogo = ({ size = 40 }) => {
 			</div>
 		</div>
 	);
-};
-
-const scrollToSection = (e, sectionId) => {
-	e.preventDefault();
-	const element = document.getElementById(sectionId);
-	if (element) {
-		const headerOffset = 80; // Учитываем высоту хедера
-		const elementPosition = element.getBoundingClientRect().top;
-		const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-		window.scrollTo({
-			top: offsetPosition,
-			behavior: 'smooth'
-		});
-	}
 }
+
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -73,13 +66,6 @@ const Header = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
-  // Обработчик для мобильного меню
-  const handleMobileNavClick = (e, sectionId) => {
-    e.preventDefault();
-    setIsMenuOpen(false);
-    scrollToSection(e, sectionId);
-  };
 
   return (
     <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled

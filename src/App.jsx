@@ -4,7 +4,7 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { useForm } from 'react-hook-form';
 import { services, advantages } from './constants/services.jsx'
 import {
-	Heart, 
+	Heart,
 	Phone,
 	Mail,
 	MapPin,
@@ -50,7 +50,7 @@ const scrollToSection = (e, sectionId) => {
 	}
 }
 
-import {  NewYearBanner5 } from './Bunners';
+import { NewYearBanner5 } from './Bunners';
 
 
 // Стильные иконки для кнопок
@@ -107,7 +107,7 @@ function App() {
 	const [captchaError, setCaptchaError] = useState('');
 	const { register, handleSubmit, formState: { errors }, reset } = useForm();
 	const [showCaptchaError, setShowCaptchaError] = useState(false);
-	
+
 	const validateForm = () => {
 		if (!captchaValue) {
 			setCaptchaError("Пожалуйста, подтвердите, что вы не робот");
@@ -149,77 +149,77 @@ function App() {
 
 			{/* Герой-секция */}
 			<section className="container mx-auto px-4 sm:px-6 pt-8 pb-12 md:pt-16 md:pb-24">
-    <div className="flex flex-col lg:flex-row items-center">
-        <FadeIn delay={100} className="lg:w-1/2 mb-12 lg:mb-0">
-            <div className="mb-8">
-                <div className="inline-flex items-center bg-gradient-to-r from-pink-100 to-rose-100 text-pink-700 px-4 py-2.5 rounded-full text-sm font-medium mb-6 font-sans shadow-sm border border-pink-200">
-                    <Award className="mr-2" size={16} />
-                    <span>10+ лет профессионального опыта</span>
-                </div>
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 font-serif leading-tight">
-                    Идеальная гладкость кожи с{' '}
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-rose-500 to-fuchsia-500">
-                        профессиональным шугарингом
-                    </span>
-                </h1>
-            </div>
-            <p className="text-lg text-gray-600 mb-10 leading-relaxed max-w-2xl">
-                Более 10 лет создаю безупречную гладкость вашей кожи с использованием
-                авторских безболезненных техник и натуральных составов премиум-класса.
-            </p>
-            
+				<div className="flex flex-col lg:flex-row items-center">
+					<FadeIn delay={100} className="lg:w-1/2 mb-12 lg:mb-0">
+						<div className="mb-8">
+							<div className="inline-flex items-center bg-gradient-to-r from-pink-100 to-rose-100 text-pink-700 px-4 py-2.5 rounded-full text-sm font-medium mb-6 font-sans shadow-sm border border-pink-200">
+								<Award className="mr-2" size={16} />
+								<span>10+ лет профессионального опыта</span>
+							</div>
+							<h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 font-serif leading-tight">
+								Идеальная гладкость кожи с{' '}
+								<span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-rose-500 to-fuchsia-500">
+									профессиональным шугарингом
+								</span>
+							</h1>
+						</div>
+						<p className="text-lg text-gray-600 mb-10 leading-relaxed max-w-2xl">
+							Более 10 лет создаю безупречную гладкость вашей кожи с использованием
+							авторских безболезненных техник и натуральных составов премиум-класса.
+						</p>
 
-            {/* Статистика */}
-            <div className="grid grid-cols-3 gap-4 max-w-md">
-                <div className="text-center p-4 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm border border-pink-100">
-                    <div className="text-2xl sm:text-3xl font-bold text-pink-600 font-serif">5000+</div>
-                    <div className="text-gray-600 text-sm">успешных процедур</div>
-                </div>
-                <div className="text-center p-4 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm border border-pink-100">
-                    <div className="text-2xl sm:text-3xl font-bold text-pink-600 font-serif">98%</div>
-                    <div className="text-gray-600 text-sm">довольных клиентов</div>
-                </div>
-                <div className="text-center p-4 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm border border-pink-100">
-                    <div className="text-2xl sm:text-3xl font-bold text-pink-600 font-serif">4.9/5</div>
-                    <div className="text-gray-600 text-sm">рейтинг эксперта</div>
-                </div>
-            </div>
-        </FadeIn>
 
-        <FadeIn delay={300} className="lg:w-1/2 relative">
-            <div className="relative mx-auto max-w-md">
-                {/* Мягкая карточка с теплыми акцентами */}
-                <div className="bg-gradient-to-br from-white to-pink-50 rounded-3xl p-6 shadow-xl shadow-pink-100 border border-pink-100">
-                    {/* Фото мастера в мягком оформлении */}
-                    <div className="relative mb-6">
-                        <div className="relative mx-auto w-48 h-48 rounded-full overflow-hidden border-8 border-white shadow-lg">
-                            <img
-                                src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=761&q=80"
-                                alt="Ирина, мастер шугаринга"
-                                className="w-full h-full object-cover"
-                            />
-                        </div>
-                        {/* Декоративный элемент вокруг фото */}
-                        <div className="absolute -inset-4 border-2 border-pink-200 rounded-full opacity-40"></div>
-                    </div>
+						{/* Статистика */}
+						<div className="grid grid-cols-3 gap-4 max-w-md">
+							<div className="text-center p-4 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm border border-pink-100">
+								<div className="text-2xl sm:text-3xl font-bold text-pink-600 font-serif">5000+</div>
+								<div className="text-gray-600 text-sm">успешных процедур</div>
+							</div>
+							<div className="text-center p-4 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm border border-pink-100">
+								<div className="text-2xl sm:text-3xl font-bold text-pink-600 font-serif">98%</div>
+								<div className="text-gray-600 text-sm">довольных клиентов</div>
+							</div>
+							<div className="text-center p-4 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm border border-pink-100">
+								<div className="text-2xl sm:text-3xl font-bold text-pink-600 font-serif">4.9/5</div>
+								<div className="text-gray-600 text-sm">рейтинг эксперта</div>
+							</div>
+						</div>
+					</FadeIn>
 
-                    {/* Информация о мастере */}
-                    <div className="text-center mb-6">
-                        <h3 className="text-2xl font-bold text-gray-900 font-serif mb-2">Ирина Сорокина</h3>                        
-                       
-                        
-                        {/* Короткое душевное описание */}
-                        <p className="text-gray-600 text-sm italic mb-6 max-w-md mx-auto">
-                            "Для меня шугаринг — это не просто процедура, а искусство создания комфорта 
-                            и уверенности в себе для каждой женщины"
-                        </p>
-                    </div>                  
-                </div>
-            </div>
-        </FadeIn>
-    </div>
-</section>
-			
+					<FadeIn delay={300} className="lg:w-1/2 relative">
+						<div className="relative mx-auto max-w-md">
+							{/* Мягкая карточка с теплыми акцентами */}
+							<div className="bg-gradient-to-br from-white to-pink-50 rounded-3xl p-6 shadow-xl shadow-pink-100 border border-pink-100">
+								{/* Фото мастера в мягком оформлении */}
+								<div className="relative mb-6">
+									<div className="relative mx-auto w-48 h-48 rounded-full overflow-hidden border-8 border-white shadow-lg">
+										<img
+											src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=761&q=80"
+											alt="Ирина, мастер шугаринга"
+											className="w-full h-full object-cover"
+										/>
+									</div>
+									{/* Декоративный элемент вокруг фото */}
+									<div className="absolute -inset-4 border-2 border-pink-200 rounded-full opacity-40"></div>
+								</div>
+
+								{/* Информация о мастере */}
+								<div className="text-center mb-6">
+									<h3 className="text-2xl font-bold text-gray-900 font-serif mb-2">Ирина Сорокина</h3>
+
+
+									{/* Короткое душевное описание */}
+									<p className="text-gray-600 text-sm italic mb-6 max-w-md mx-auto">
+										"Для меня шугаринг — это не просто процедура, а искусство создания комфорта
+										и уверенности в себе для каждой женщины"
+									</p>
+								</div>
+							</div>
+						</div>
+					</FadeIn>
+				</div>
+			</section>
+
 			<NewYearBanner5 />
 
 			{/* Услуги с каскадным эффектом */}
@@ -500,8 +500,6 @@ function App() {
 												{...register("phone", {
 													required: "Введите ваш телефон",
 													pattern: {
-														// value: /^[\+]?[7-8]?[0-9]{10}$/,
-														// message: "Введите корректный номер телефона"
 													}
 												})}
 											/>
@@ -542,18 +540,6 @@ function App() {
 											></textarea>
 										</div>
 
-										{/* <div>
-											<div className="relative">
-												<div className="g-recaptcha overflow-hidden w-full" style={{ transform: 'scale(0.95)', transformOrigin: '0 0' }}>
-													<ReCAPTCHA
-														sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-														onChange={onCaptchaChange}
-													/>
-												</div>
-											
-											</div>
-										</div> */}
-
 										<button
 											type="submit"
 											disabled={isSubmitting}
@@ -578,7 +564,6 @@ function App() {
 											</div>
 										</button>
 
-										{/* Улучшенный текст о персональных данных */}
 										<div className="pt-4 border-t border-gray-100">
 											<div className="flex items-start space-x-3">
 												<div className="flex-shrink-0 mt-0.5">

@@ -1,6 +1,5 @@
 // App.jsx
 import { useState, useEffect } from 'react';
-import ReCAPTCHA from 'react-google-recaptcha';
 import { useForm } from 'react-hook-form';
 import { services, advantages } from './constants/services.jsx'
 import {
@@ -10,21 +9,17 @@ import {
 	MapPin,
 	Clock,
 	CheckCircle,
-	Star,
 	MessageCircle,
 	ChevronRight,
-	Calendar,
 	Sparkles,
 	Shield,
-	ArrowRight,
+	ShieldCheck,
 	Award,
 	TrendingUp,
 	UserCheck,
 	Package,
-	ShieldCheck,
 	Gift,
 	Snowflake,
-	Star as StarIcon,
 	Zap,
 	Percent,
 	CalendarDays,
@@ -35,6 +30,7 @@ import {
 } from 'lucide-react';
 import Header from './Header'
 
+// Функция для скролла
 const scrollToSection = (e, sectionId) => {
 	e.preventDefault();
 	const element = document.getElementById(sectionId);
@@ -48,41 +44,46 @@ const scrollToSection = (e, sectionId) => {
 			behavior: 'smooth'
 		});
 	}
-}
+};
 
-import { NewYearBanner5 } from './Bunners';
+// Компоненты иконок - добавлен return
+const PremiumIcon = () => {
+	return (
+		<svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+			<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+				d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+			/>
+		</svg>
+	);
+};
 
-
-// Стильные иконки для кнопок
-const PremiumIcon = () => (
-	<svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-		<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-			d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-		/>
-	</svg>
-);
-
-const CrystalIcon = () => (
-	<svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-		<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-			d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0 2v2m0 0V7m0 2l-6 2"
-		/>
-	</svg>
-);
+const CrystalIcon = () => {
+	return (
+		<svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+			<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+				d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0 2v2m0 0V7m0 2l-6 2"
+			/>
+		</svg>
+	);
+};
 
 // Instagram иконка
-const InstagramIcon = () => (
-	<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-		<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z" />
-	</svg>
-);
+const InstagramIcon = () => {
+	return (
+		<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z" />
+		</svg>
+	);
+};
 
 // Facebook иконка
-const FacebookIcon = () => (
-	<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-		<path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-	</svg>
-);
+const FacebookIcon = () => {
+	return (
+		<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+			<path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+		</svg>
+	);
+};
 
 // Простой компонент для анимаций
 const FadeIn = ({ children, delay = 0 }) => {
@@ -108,14 +109,15 @@ function App() {
 	const { register, handleSubmit, formState: { errors }, reset } = useForm();
 	const [showCaptchaError, setShowCaptchaError] = useState(false);
 
-	const validateForm = () => {
-		if (!captchaValue) {
-			setCaptchaError("Пожалуйста, подтвердите, что вы не робот");
-			setShowCaptchaError(true);
-			return false;
-		}
-		return true;
-	};
+	// Убрана неиспользуемая функция validateForm
+	// const validateForm = () => {
+	//   if (!captchaValue) {
+	//     setCaptchaError("Пожалуйста, подтвердите, что вы не робот");
+	//     setShowCaptchaError(true);
+	//     return false;
+	//   }
+	//   return true;
+	// };
 
 	const onSubmit = async (data) => {
 		if (!captchaValue) {
@@ -154,7 +156,7 @@ function App() {
 						<div className="mb-8">
 							<div className="inline-flex items-center bg-gradient-to-r from-pink-100 to-rose-100 text-pink-700 px-4 py-2.5 rounded-full text-sm font-medium mb-6 font-sans shadow-sm border border-pink-200">
 								<Award className="mr-2" size={16} />
-								<span>10+ лет профессионального опыта</span>
+								<span>5+ лет профессионального опыта</span>
 							</div>
 							<h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 font-serif leading-tight">
 								Идеальная гладкость кожи с{' '}
@@ -167,7 +169,6 @@ function App() {
 							Более 10 лет создаю безупречную гладкость вашей кожи с использованием
 							авторских безболезненных техник и натуральных составов премиум-класса.
 						</p>
-
 
 						{/* Статистика */}
 						<div className="grid grid-cols-3 gap-4 max-w-md">
@@ -207,7 +208,6 @@ function App() {
 								<div className="text-center mb-6">
 									<h3 className="text-2xl font-bold text-gray-900 font-serif mb-2">Ирина Сорокина</h3>
 
-
 									{/* Короткое душевное описание */}
 									<p className="text-gray-600 text-sm italic mb-6 max-w-md mx-auto">
 										"Для меня шугаринг — это не просто процедура, а искусство создания комфорта
@@ -219,8 +219,6 @@ function App() {
 					</FadeIn>
 				</div>
 			</section>
-
-			<NewYearBanner5 />
 
 			{/* Услуги с каскадным эффектом */}
 			<section id="services" className="container mx-auto px-4 py-16">
@@ -238,10 +236,6 @@ function App() {
 							key={service.id}
 							className={`relative rounded-2xl overflow-hidden shadow-xl bg-white transform transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl ${index % 3 === 0 ? 'lg:mt-0' : index % 3 === 1 ? 'lg:mt-8' : 'lg:mt-16'
 								}`}
-							style={{
-								animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`,
-								animationFillMode: 'both'
-							}}
 						>
 							{service.popular && (
 								<div className="absolute top-4 right-4 bg-gradient-to-r from-pink-500 to-rose-500 text-white px-3 py-1 rounded-full text-sm font-medium z-10 shadow-lg">
@@ -328,10 +322,6 @@ function App() {
 										<div
 											key={index}
 											className="flex items-start transition-all duration-500 hover:translate-x-2"
-											style={{
-												animation: `fadeInRight 0.6s ease-out ${index * 0.1}s both`,
-												animationFillMode: 'both'
-											}}
 										>
 											<div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-pink-100 to-rose-100 rounded-full flex items-center justify-center mr-4 shadow-sm">
 												<CheckCircle className="text-pink-600" size={24} />
@@ -500,8 +490,11 @@ function App() {
 												{...register("phone", {
 													required: "Введите ваш телефон",
 													pattern: {
+														value: /^\+?[0-9\s\-()]+$/,
+														message: "Введите корректный номер телефона"
 													}
-												})}
+												}
+												)}
 											/>
 											{errors.phone && (
 												<p className="text-red-500 text-sm mt-2 flex items-center">

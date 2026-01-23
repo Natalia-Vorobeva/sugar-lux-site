@@ -1,5 +1,5 @@
 // App.jsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { services, advantages } from './constants/services.jsx'
 import {
@@ -15,7 +15,6 @@ import {
 	Shield,
 	ShieldCheck,
 	Award,
-	TrendingUp,
 	UserCheck,
 	Package,
 	Gift,
@@ -27,6 +26,10 @@ import {
 	Crown,
 	Clock4,
 	Gem,
+	Plus,
+	X,
+	ChevronDown,
+	ChevronUp,
 } from 'lucide-react';
 import Header from './Header'
 
@@ -46,7 +49,7 @@ const scrollToSection = (e, sectionId) => {
 	}
 };
 
-// Компоненты иконок - добавлен return
+// Компоненты иконок
 const PremiumIcon = () => {
 	return (
 		<svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -76,11 +79,11 @@ const InstagramIcon = () => {
 	);
 };
 
-// Facebook иконка
-const FacebookIcon = () => {
+// Telegram иконка
+const TelegramIcon = () => {
 	return (
 		<svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-			<path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+			<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.69 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.06-.2-.07-.06-.17-.04-.24-.02-.1.02-1.79 1.14-5.06 3.34-.48.33-.91.49-1.3.48-.43-.01-1.25-.24-1.86-.44-.75-.24-1.35-.37-1.29-.78.03-.2.32-.41.89-.62 3.47-1.49 5.78-2.47 6.94-2.95 3.24-1.32 3.92-1.55 4.36-1.56.09 0 .29.02.42.12.1.08.13.19.14.27-.01.06.01.24 0 .41z" />
 		</svg>
 	);
 };
@@ -101,6 +104,30 @@ const FadeIn = ({ children, delay = 0 }) => {
 	);
 };
 
+// Компонент для FAQ аккордеона
+const FAQItem = ({ question, answer, isOpen, onClick }) => {
+	return (
+		<div className="border-b border-pink-100 last:border-b-0">
+			<button
+				className="w-full py-4 px-2 flex justify-between items-center text-left hover:bg-pink-50/50 rounded-lg transition-colors"
+				onClick={onClick}
+			>
+				<span className="text-lg font-medium text-gray-900 font-serif pr-4">{question}</span>
+				{isOpen ? (
+					<ChevronUp className="text-pink-500 flex-shrink-0" size={20} />
+				) : (
+					<ChevronDown className="text-pink-500 flex-shrink-0" size={20} />
+				)}
+			</button>
+			{isOpen && (
+				<div className="px-2 pb-4">
+					<p className="text-gray-600 leading-relaxed">{answer}</p>
+				</div>
+			)}
+		</div>
+	);
+};
+
 function App() {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -108,16 +135,57 @@ function App() {
 	const [captchaError, setCaptchaError] = useState('');
 	const { register, handleSubmit, formState: { errors }, reset } = useForm();
 	const [showCaptchaError, setShowCaptchaError] = useState(false);
+	const [openFAQ, setOpenFAQ] = useState(null);
+	const [showScrollTop, setShowScrollTop] = useState(false);
+	const formRef = useRef(null);
 
-	// Убрана неиспользуемая функция validateForm
-	// const validateForm = () => {
-	//   if (!captchaValue) {
-	//     setCaptchaError("Пожалуйста, подтвердите, что вы не робот");
-	//     setShowCaptchaError(true);
-	//     return false;
-	//   }
-	//   return true;
-	// };
+	// Портфолио изображения
+	const portfolioImages = [
+		{ id: 1, title: "Бикини", color: "from-pink-200 to-rose-300" },
+		{ id: 2, title: "Ноги", color: "from-purple-200 to-pink-300" },
+		{ id: 3, title: "Подмышки", color: "from-rose-200 to-orange-300" },
+		{ id: 4, title: "Лицо", color: "from-blue-200 to-purple-300" },
+		{ id: 5, title: "Руки", color: "from-green-200 to-teal-300" },
+		{ id: 6, title: "Спина", color: "from-yellow-200 to-orange-300" },
+	];
+
+	// FAQ данные
+	const faqItems = [
+		{
+			id: 1,
+			question: "Насколько болезненна процедура шугаринга?",
+			answer: "При правильной технике и качественной пасте дискомфорт минимален. Я использую безболезненные техники и натуральные составы премиум-класса, которые мягко удаляют волосы без травмирования кожи."
+		},
+		{
+			id: 2,
+			question: "Как подготовиться к процедуре?",
+			answer: "За 2-3 дня до процедуры рекомендуется сделать легкий пилинг зоны депиляции. Волосы должны быть длиной 5-7 мм. За сутки до процедуры избегайте загара, посещения сауны и использования кремов с активными компонентами."
+		},
+		{
+			id: 3,
+			question: "Как долго сохраняется эффект гладкости?",
+			answer: "Эффект сохраняется от 3 до 5 недель в зависимости от индивидуальных особенностей и зоны. При регулярном проведении процедур волосы становятся тоньше и растут медленнее."
+		},
+		{
+			id: 4,
+			question: "Можно ли делать шугаринг при беременности?",
+			answer: "Да, шугаринг безопасен во время беременности, так как используются натуральные компоненты. Однако рекомендуется проконсультироваться с врачом и проводить процедуру во втором триместре, когда риски минимальны."
+		},
+		{
+			id: 5,
+			question: "Какой уход нужен после процедуры?",
+			answer: "В течение 24 часов избегайте горячих ванн, сауны, бассейна и прямых солнечных лучей. Рекомендуется наносить успокаивающий крем или лосьон без отдушек. Через 2-3 дня можно делать легкий пилинг для профилактики вросших волос."
+		}
+	];
+
+	// Отслеживание скролла для кнопки "Наверх"
+	useEffect(() => {
+		const handleScroll = () => {
+			setShowScrollTop(window.pageYOffset > 400);
+		};
+		window.addEventListener('scroll', handleScroll);
+		return () => window.removeEventListener('scroll', handleScroll);
+	}, []);
 
 	const onSubmit = async (data) => {
 		if (!captchaValue) {
@@ -145,78 +213,116 @@ function App() {
 		setCaptchaError('');
 	};
 
+	const handleScrollTop = () => {
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth'
+		});
+	};
+
+	const handleBookNow = () => {
+		if (formRef.current) {
+			formRef.current.scrollIntoView({
+				behavior: 'smooth'
+			});
+		}
+	};
+
+	const toggleFAQ = (id) => {
+		setOpenFAQ(openFAQ === id ? null : id);
+	};
+
 	return (
 		<div className="min-h-screen bg-gradient-to-b from-pink-50/30 via-white to-white font-sans">
 			<Header />
 
 			{/* Герой-секция */}
-			<section className="container mx-auto px-4 sm:px-6 pt-8 pb-12 md:pt-16 md:pb-24">
-				<div className="flex flex-col lg:flex-row items-center">
-					<FadeIn delay={100} className="lg:w-1/2 mb-12 lg:mb-0">
-						<div className="mb-8">
-							<div className="inline-flex items-center bg-gradient-to-r from-pink-100 to-rose-100 text-pink-700 px-4 py-2.5 rounded-full text-sm font-medium mb-6 font-sans shadow-sm border border-pink-200">
-								<Award className="mr-2" size={16} />
-								<span>5+ лет профессионального опыта</span>
-							</div>
-							<h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 font-serif leading-tight">
-								Идеальная гладкость кожи с{' '}
-								<span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-rose-500 to-fuchsia-500">
-									профессиональным шугарингом
-								</span>
-							</h1>
-						</div>
-						<p className="text-lg text-gray-600 mb-10 leading-relaxed max-w-2xl">
-							Более 10 лет создаю безупречную гладкость вашей кожи с использованием
-							авторских безболезненных техник и натуральных составов премиум-класса.
-						</p>
+			<section className="container mx-auto px-4 sm:px-6 py-12 md:py-20 lg:py-28">
+				<div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+					{/* Текстовая часть */}
+					<div className="lg:w-1/2">
+						<FadeIn delay={100}>
+							<div className="mb-6">
+								<div className="inline-flex items-center bg-gradient-to-r from-pink-100 to-rose-100 text-pink-700 px-4 py-2 rounded-full text-sm font-medium mb-4">
+									<Award className="mr-2" size={16} />
+									<span>5+ лет опыта</span>
+								</div>
 
-						{/* Статистика */}
-						<div className="grid grid-cols-3 gap-4 max-w-md">
-							<div className="text-center p-4 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm border border-pink-100">
-								<div className="text-2xl sm:text-3xl font-bold text-pink-600 font-serif">5000+</div>
-								<div className="text-gray-600 text-sm">успешных процедур</div>
+								<h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-4 font-serif leading-tight">
+									Профессиональный шугаринг
+									<span className="block text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-rose-500">
+										с гарантией комфорта
+									</span>
+								</h1>
 							</div>
-							<div className="text-center p-4 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm border border-pink-100">
-								<div className="text-2xl sm:text-3xl font-bold text-pink-600 font-serif">98%</div>
-								<div className="text-gray-600 text-sm">довольных клиентов</div>
-							</div>
-							<div className="text-center p-4 rounded-xl bg-white/80 backdrop-blur-sm shadow-sm border border-pink-100">
-								<div className="text-2xl sm:text-3xl font-bold text-pink-600 font-serif">4.9/5</div>
-								<div className="text-gray-600 text-sm">рейтинг эксперта</div>
-							</div>
-						</div>
-					</FadeIn>
 
-					<FadeIn delay={300} className="lg:w-1/2 relative">
-						<div className="relative mx-auto max-w-md">
-							{/* Мягкая карточка с теплыми акцентами */}
-							<div className="bg-gradient-to-br from-white to-pink-50 rounded-3xl p-6 shadow-xl shadow-pink-100 border border-pink-100">
-								{/* Фото мастера в мягком оформлении */}
-								<div className="relative mb-6">
-									<div className="relative mx-auto w-48 h-48 rounded-full overflow-hidden border-8 border-white shadow-lg">
-										<img
-											src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=761&q=80"
-											alt="Ирина, мастер шугаринга"
-											className="w-full h-full object-cover"
-										/>
+							<p className="text-gray-600 text-lg mb-6">
+								Удаление волос без боли и раздражений с использованием
+								гипоаллергенных составов и стерильных инструментов
+							</p>
+
+							<div className="grid grid-cols-2 gap-3 mb-6">
+								<div className="flex items-center text-gray-700">
+									<CheckCircle className="text-pink-500 mr-2" size={18} />
+									<span>Без боли</span>
+								</div>
+								<div className="flex items-center text-gray-700">
+									<Shield className="text-pink-500 mr-2" size={18} />
+									<span>Стерильно</span>
+								</div>
+								<div className="flex items-center text-gray-700">
+									<Sparkles className="text-pink-500 mr-2" size={18} />
+									<span>Натуральные составы</span>
+								</div>
+								<div className="flex items-center text-gray-700">
+									<Clock className="text-pink-500 mr-2" size={18} />
+									<span>До 4 недель</span>
+								</div>
+							</div>
+
+							<button
+								onClick={handleBookNow}
+								className="bg-gradient-to-r from-pink-500 to-rose-500 text-white px-6 py-3 rounded-xl font-medium hover:shadow-lg hover:scale-105 transition-all duration-300 shadow-md shadow-pink-500/30"
+							>
+								Записаться на процедуру
+							</button>
+						</FadeIn>
+					</div>
+
+
+					{/* Фото - отдельный элемент */}
+					<div className="lg:w-1/2 relative">
+						<FadeIn delay={300}>
+							<div className="relative group">
+								<div className="aspect-[4/5] md:aspect-[3/4] lg:aspect-square rounded-2xl overflow-hidden shadow-2xl border-8 border-white relative"
+									style={{
+										backgroundImage: `url('images/master.jpg')`,
+										backgroundSize: 'cover', // или 'contain'
+										backgroundPosition: '10% 30%', // или 'top center', 'center bottom'
+										backgroundRepeat: 'no-repeat',
+									}}
+								>
+									<div className="absolute inset-0 bg-gradient-to-br from-pink-500/10 to-rose-500/5 mix-blend-overlay z-10"></div>
+									{/* <img
+										src="images/master.jpg"
+										alt="Мастер шугаринга Ирина Соротокина"
+										className="w-full h-full object-cover object-[center_20%] md:object-[center_30%] group-hover:scale-105 transition-transform duration-700"
+									/> */}
+									{/* Имя снизу с градиентом */}
+									<div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent p-6 pb-10">
+										<div className="text-white text-center">
+											<div className="text-2xl font-bold font-serif mb-2">Ирина Соротокина</div>
+											<div className="text-sm opacity-95 tracking-wider">МАСТЕР ШУГАРИНГА</div>
+										</div>
 									</div>
-									{/* Декоративный элемент вокруг фото */}
-									<div className="absolute -inset-4 border-2 border-pink-200 rounded-full opacity-40"></div>
+									{/* Розовая акцентная полоса внизу */}
+									<div className="absolute bottom-0 left-0 right-0 h-2 bg-gradient-to-r from-pink-400 to-rose-400"></div>
 								</div>
-
-								{/* Информация о мастере */}
-								<div className="text-center mb-6">
-									<h3 className="text-2xl font-bold text-gray-900 font-serif mb-2">Ирина Сорокина</h3>
-
-									{/* Короткое душевное описание */}
-									<p className="text-gray-600 text-sm italic mb-6 max-w-md mx-auto">
-										"Для меня шугаринг — это не просто процедура, а искусство создания комфорта
-										и уверенности в себе для каждой женщины"
-									</p>
-								</div>
+								{/* Декоративный элемент в стиле сайта */}
+								<div className="absolute -bottom-4 -right-4 w-28 h-28 bg-gradient-to-br from-pink-200/30 to-rose-200/20 rounded-2xl -z-10 border border-pink-200/20 backdrop-blur-sm"></div>
 							</div>
-						</div>
-					</FadeIn>
+						</FadeIn>
+					</div>
 				</div>
 			</section>
 
@@ -264,7 +370,10 @@ function App() {
 										<span>{service.duration}</span>
 									</div>
 
-									<button className="text-pink-600 font-medium hover:text-pink-700 flex items-center transition-colors group">
+									<button
+										onClick={handleBookNow}
+										className="text-pink-600 font-medium hover:text-pink-700 flex items-center transition-colors group"
+									>
 										Записаться
 										<ChevronRight size={16} className="ml-1 group-hover:translate-x-1 transition-transform" />
 									</button>
@@ -275,72 +384,114 @@ function App() {
 				</div>
 			</section>
 
-			{/* Обо мне и преимущества */}
-			<section id="about" className="bg-gradient-to-r from-pink-50/50 to-rose-50/50 py-16">
+			{/* Портфолио */}
+			<section id="portfolio" className="bg-gradient-to-r from-pink-50/50 to-rose-50/50 py-16">
 				<div className="container mx-auto px-4">
-					<div className="flex flex-col lg:flex-row items-center">
-						<div className="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12">
-							<h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 font-serif">Обо мне</h2>
-							<p className="text-gray-700 mb-6 text-lg leading-relaxed">
-								Меня зовут Ирина, и я профессиональный мастер шугаринга с более чем 10-летним опытом.
-								Начала свой путь в индустрии красоты в 2012 году и с тех пор помогла тысячам клиентов
-								обрести идеально гладкую кожу без раздражений.
-							</p>
-							<p className="text-gray-700 mb-8 text-lg leading-relaxed">
-								Я постоянно совершенствую свои навыки, посещаю международные мастер-классы
-								и использую только сертифицированные гипоаллергенные материалы.
-								Моя цель — не просто удалить волосы, а сделать процедуру максимально комфортной
-								и эффективной для каждого клиента.
-							</p>
+					<div className="text-center mb-12">
+						<h2 className="text-3xl md:text-4xl font-bold text-gray-900 pt-4 mb-4 font-serif">Портфолио</h2>
+						<p className="text-gray-600 max-w-2xl mx-auto text-lg">
+							Примеры зон работы и профессионального подхода к каждой процедуре
+						</p>
+					</div>
 
-							<div className="grid grid-cols-2 gap-6">
-								<div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-									<div className="text-3xl font-bold text-pink-600 mb-2 font-serif">5000+</div>
-									<div className="text-gray-700">Успешных процедур</div>
+					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+						{portfolioImages.map((item) => (
+							<div
+								key={item.id}
+								className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
+							>
+								<div className={`h-64 w-full bg-gradient-to-br ${item.color} relative overflow-hidden`}>
+									<div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-500"></div>
+									<div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6 pt-12">
+										<h3 className="text-white text-xl font-bold font-serif">{item.title}</h3>
+										<p className="text-white/90 text-sm mt-1">Профессиональный шугаринг</p>
+									</div>
 								</div>
-								<div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-									<div className="text-3xl font-bold text-pink-600 mb-2 font-serif">10+</div>
-									<div className="text-gray-700">Лет опыта</div>
-								</div>
-								<div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-									<div className="text-3xl font-bold text-pink-600 mb-2 font-serif">98%</div>
-									<div className="text-gray-700">Довольных клиентов</div>
-								</div>
-								<div className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-									<div className="text-3xl font-bold text-pink-600 mb-2 font-serif">15+</div>
-									<div className="text-gray-700">Сертификатов</div>
+								<div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full w-10 h-10 flex items-center justify-center group-hover:scale-110 transition-transform">
+									<Plus className="text-pink-600" size={20} />
 								</div>
 							</div>
+						))}
+					</div>
+
+					<div className="mt-12 text-center">
+						<div className="inline-flex items-center justify-center gap-6">
+							<div className="flex items-center text-gray-700">
+								<CheckCircle className="text-pink-500 mr-2" size={20} />
+								<span className="font-medium">Гипоаллергенные составы</span>
+							</div>
+							<div className="flex items-center text-gray-700">
+								<CheckCircle className="text-pink-500 mr-2" size={20} />
+								<span className="font-medium">Стерильные инструменты</span>
+							</div>
+							<div className="flex items-center text-gray-700">
+								<CheckCircle className="text-pink-500 mr-2" size={20} />
+								<span className="font-medium">Индивидуальный подход</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			{/* Преимущества */}
+			{/* <section id="advantages" className="py-16">
+				<div className="container mx-auto px-4">
+					<div className="text-center mb-12">
+						<h2 className="text-3xl md:text-4xl font-bold text-gray-900 pt-4 mb-4 font-serif">Мои преимущества</h2>
+						<p className="text-gray-600 max-w-2xl mx-auto text-lg">
+							Почему клиенты выбирают именно меня
+						</p>
+					</div>
+
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+						{advantages.map((advantage, index) => (
+							<div
+								key={index}
+								className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-pink-100 group"
+							>
+								<div className="flex items-start mb-4">
+									<div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-pink-100 to-rose-100 rounded-full flex items-center justify-center mr-4 shadow-sm group-hover:scale-110 transition-transform">
+										<CheckCircle className="text-pink-600" size={24} />
+									</div>
+									<p className="text-gray-700 text-lg leading-relaxed pt-2 font-serif">{advantage}</p>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+			</section> */}
+
+			{/* FAQ */}
+			<section id="faq" className="bg-gradient-to-r from-pink-50/50 to-rose-50/50 py-16">
+				<div className="container mx-auto px-4">
+					<div className="text-center mb-12">
+						<h2 className="text-3xl md:text-4xl font-bold text-gray-900 pt-4 mb-4 font-serif">Частые вопросы</h2>
+						<p className="text-gray-600 max-w-2xl mx-auto text-lg">
+							Ответы на самые популярные вопросы о шугаринге
+						</p>
+					</div>
+
+					<div className="max-w-3xl mx-auto bg-white rounded-3xl shadow-xl p-6 md:p-8 border border-pink-100">
+						<div className="space-y-2">
+							{faqItems.map((item) => (
+								<FAQItem
+									key={item.id}
+									question={item.question}
+									answer={item.answer}
+									isOpen={openFAQ === item.id}
+									onClick={() => toggleFAQ(item.id)}
+								/>
+							))}
 						</div>
 
-						<div className="lg:w-1/2">
-							<div id="advantages" className="bg-white rounded-3xl shadow-2xl p-8 hover:shadow-2xl transition-shadow duration-500">
-								<h3 className="text-2xl font-bold text-gray-900 mb-6 font-serif">Мои преимущества</h3>
-
-								<div className="space-y-6">
-									{advantages.map((advantage, index) => (
-										<div
-											key={index}
-											className="flex items-start transition-all duration-500 hover:translate-x-2"
-										>
-											<div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-pink-100 to-rose-100 rounded-full flex items-center justify-center mr-4 shadow-sm">
-												<CheckCircle className="text-pink-600" size={24} />
-											</div>
-											<p className="text-gray-700 text-lg leading-relaxed">{advantage}</p>
-										</div>
-									))}
+						<div className="mt-8 p-6 bg-gradient-to-r from-pink-50 to-rose-50 rounded-2xl border border-pink-100">
+							<div className="flex items-center">
+								<div className="w-12 h-12 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full flex items-center justify-center mr-4 shadow-sm">
+									<MessageCircle className="text-white" size={24} />
 								</div>
-
-								<div className="mt-10 p-6 bg-gradient-to-r from-pink-50 to-rose-50 rounded-2xl hover:shadow-md transition-shadow duration-300 border border-pink-100">
-									<div className="flex items-center">
-										<div className="w-16 h-16 rounded-full bg-gradient-to-r from-pink-100 to-rose-100 flex items-center justify-center mr-4 shadow-sm">
-											<MessageCircle className="text-pink-600" size={28} />
-										</div>
-										<div>
-											<h4 className="font-bold text-gray-900 text-lg font-serif">Консультация</h4>
-											<p className="text-gray-700">Бесплатная консультация перед первой процедурой</p>
-										</div>
-									</div>
+								<div>
+									<h4 className="font-bold text-gray-900 text-lg font-serif">Остались вопросы?</h4>
+									<p className="text-gray-700">Напишите мне в Telegram, с радостью отвечу!</p>
 								</div>
 							</div>
 						</div>
@@ -349,7 +500,7 @@ function App() {
 			</section>
 
 			{/* Контакты и форма */}
-			<section id="contact" className="container mx-auto px-4 sm:px-6 py-16">
+			<section id="contact" className="container mx-auto px-4 sm:px-6 py-16" ref={formRef}>
 				<div className="text-center mb-12">
 					<h2 className="text-3xl md:text-4xl font-bold text-gray-900 pt-4 mb-4 font-serif">Контакты и запись</h2>
 					<p className="text-gray-600 max-w-2xl mx-auto text-lg">
@@ -417,7 +568,7 @@ function App() {
 										<InstagramIcon className="group-hover:scale-110 transition-transform" />
 									</a>
 									<a href="#" className="w-12 h-12 bg-gradient-to-r from-pink-100 to-rose-100 rounded-full flex items-center justify-center hover:shadow-lg hover:scale-110 transition-all duration-300 shadow-sm group">
-										<FacebookIcon className="group-hover:scale-110 transition-transform" />
+										<TelegramIcon className="group-hover:scale-110 transition-transform" />
 									</a>
 								</div>
 							</div>
@@ -489,10 +640,10 @@ function App() {
 												placeholder="+7 (___) ___-__-__"
 												{...register("phone", {
 													required: "Введите ваш телефон",
-													pattern: {
-														value: /^\+?[0-9\s\-()]+$/,
-														message: "Введите корректный номер телефона"
-													}
+													// pattern: {
+													// 	value: /^(\+7|7|8)?[\s\-]?\(?[0-9]{3}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/,
+													// 	message: "Введите номер в формате: +7 (999) 123-45-67"
+													// }
 												}
 												)}
 											/>
@@ -607,7 +758,7 @@ function App() {
 							<div className="text-gray-400 mb-4">Москва, ул. Тверская, д. 10, офис 25</div>
 							<div className="flex justify-center md:justify-end space-x-6">
 								<a href="#" className="text-gray-400 hover:text-white transition-colors">Instagram</a>
-								<a href="#" className="text-gray-400 hover:text-white transition-colors">Facebook</a>
+								<a href="#" className="text-gray-400 hover:text-white transition-colors">Telegram</a>
 								<a href="#" className="text-gray-400 hover:text-white transition-colors">Политика конфиденциальности</a>
 							</div>
 						</div>
@@ -618,6 +769,18 @@ function App() {
 					</div>
 				</div>
 			</footer>
+
+			
+			{/* Кнопка "Наверх" */}
+			{showScrollTop && (
+				<button
+					onClick={handleScrollTop}
+					className="fixed bottom-6 left-6 bg-white text-pink-600 p-3 rounded-full shadow-2xl shadow-gray-300/50 hover:shadow-gray-400/60 hover:scale-110 transition-all duration-300 z-50 border border-pink-200 group"
+					aria-label="Наверх"
+				>
+					<ChevronUp className="group-hover:-translate-y-0.5 transition-transform" size={24} />
+				</button>
+			)}
 		</div>
 	);
 }

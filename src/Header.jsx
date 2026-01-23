@@ -118,17 +118,17 @@ const Header = () => {
 						</a>
 						<a
 							href="#about"
-							onClick={(e) => scrollToSection(e, 'about')}
+							onClick={(e) => scrollToSection(e, 'portfolio')}
 							className="px-4 py-2 rounded-full text-sm font-medium text-gray-700 hover:text-pink-600 hover:bg-gradient-to-r hover:from-pink-50 hover:to-rose-50 transition-all duration-200"
 						>
-							Обо мне
+							Портфолио
 						</a>
 						<a
 							href="#contact"
 							onClick={(e) => scrollToSection(e, 'contact')}
 							className="px-4 py-2 rounded-full text-sm font-medium text-gray-700 hover:text-pink-600 hover:bg-gradient-to-r hover:from-pink-50 hover:to-rose-50 transition-all duration-200"
 						>
-							Запись
+							Контакты
 						</a>
 					</nav>
 
